@@ -1192,6 +1192,8 @@ footer .sifa-social-links a svg, .site-footer .sifa-social-links a svg {
 .sifa-social-links a:nth-child(4){color:#FF0000 !important}
 .sifa-social-links a:nth-child(5){color:#00F2EA !important}
 .sifa-social-links a:nth-child(6){color:#FFFFFF !important}
+.sifa-social-links a:nth-child(7){color:#25D366 !important}
+
 .sifa-social-links a:hover{transform:translateY(-2px) scale(1.08) !important;opacity:.9 !important}
 
 /* Final Student Portal security UX */
