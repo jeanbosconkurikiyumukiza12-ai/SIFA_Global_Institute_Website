@@ -1,26 +1,39 @@
 
 
-const menu = document.querySelector('.menu');
-const nav = document.querySelector('nav ul');
+// SIFA mobile navigation menu
+function initializeSifaMenu() {
+  const menu = document.querySelector('header .menu');
+  const nav = document.querySelector('header nav ul');
 
-if (menu && nav) {
-  menu.setAttribute('aria-expanded', 'false');
+  if (!menu || !nav) return;
 
-  menu.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
+  menu.type = 'button';
+
+  function setMenuOpen(isOpen) {
+    nav.classList.toggle('open', isOpen);
     menu.setAttribute('aria-expanded', String(isOpen));
     menu.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     menu.textContent = isOpen ? '✕' : '☰';
+  }
+
+  setMenuOpen(false);
+
+  menu.addEventListener('click', function (event) {
+    event.preventDefault();
+    setMenuOpen(!nav.classList.contains('open'));
   });
 
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      menu.setAttribute('aria-expanded', 'false');
-      menu.setAttribute('aria-label', 'Open menu');
-      menu.textContent = '☰';
-    });
+  nav.addEventListener('click', function (event) {
+    if (event.target.closest('a')) {
+      setMenuOpen(false);
+    }
   });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeSifaMenu);
+} else {
+  initializeSifaMenu();
 }
 
 
