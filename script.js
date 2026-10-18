@@ -20,10 +20,7 @@ function initializeSifaMenu() {
 
  menu.addEventListener('click', function (event) {
   event.preventDefault();
-  event.stopPropagation();
-
-  const isOpen = nav.classList.contains('open');
-  setMenuOpen(!isOpen);
+  setMenuOpen(!nav.classList.contains('open'));
 });
 
   nav.addEventListener('click', function (event) {
