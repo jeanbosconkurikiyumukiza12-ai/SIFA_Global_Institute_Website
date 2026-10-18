@@ -755,6 +755,7 @@ footer a:hover{color:#9af45f}
     letter-spacing: 0.8px;
     color: #62c78a;
     text-transform: uppercase;
+}
 
 
 .site-header,
@@ -1120,10 +1121,12 @@ header nav a.nav-cta:hover {
         justify-content: center;
     }
 
-    .main-nav {
-        justify-content: center;
-    }
-}.home-eyebrow {
+   .main-nav {
+    justify-content: center;
+}
+}
+
+.home-eyebrow {
     color: #ffffff !important;
 }/* Home hero eyebrow visibility fix */
 .hero .eyebrow,
@@ -1221,4 +1224,5 @@ footer .sifa-social-links a svg, .site-footer .sifa-social-links a svg {
     display: block !important;
     cursor: pointer;
   }
+}
 }

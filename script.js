@@ -18,10 +18,13 @@ function initializeSifaMenu() {
 
   setMenuOpen(false);
 
-  menu.addEventListener('click', function (event) {
-    event.preventDefault();
-    setMenuOpen(!nav.classList.contains('open'));
-  });
+ menu.addEventListener('click', function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  const isOpen = nav.classList.contains('open');
+  setMenuOpen(!isOpen);
+});
 
   nav.addEventListener('click', function (event) {
     if (event.target.closest('a')) {
@@ -42,7 +45,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     const id=a.getAttribute('href');
     if(id.length>1){
       const el=document.querySelector(id);
-      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});nav?.classList.remove('open')}
+      if (el) {
+  e.preventDefault();
+  el.scrollIntoView({ behavior: 'smooth' });
+
+  const nav = document.querySelector('header nav ul');
+  const menu = document.querySelector('header .menu');
+
+  nav?.classList.remove('open');
+
+  if (menu) {
+    menu.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-label', 'Open menu');
+    menu.textContent = '☰';
+  }
+}
     }
   })
 });
