@@ -18,9 +18,12 @@ function initializeSifaMenu() {
 
   setMenuOpen(false);
 
- menu.addEventListener('click', function (event) {
+menu.addEventListener('click', function (event) {
   event.preventDefault();
-  setMenuOpen(!nav.classList.contains('open'));
+  event.stopPropagation();
+
+  const isOpen = nav.classList.contains('open');
+  setMenuOpen(!isOpen);
 });
 
   nav.addEventListener('click', function (event) {
