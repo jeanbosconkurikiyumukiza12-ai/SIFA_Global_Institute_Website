@@ -437,9 +437,20 @@ footer a:hover{color:#9af45f}
     gap: 40px;
 }
 
-.footer-logo {
-    width: 120px;
-    margin-bottom: 20px;
+/* Standardized circular SIFA footer logo on every page */
+.footer-logo,
+.site-footer .footer-brand img,
+.site-footer .footer-grid > div:first-child > img {
+    display: block;
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important;
+    object-fit: contain;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-radius: 50%;
+    padding: 4px;
+    margin: 0 0 20px 0;
 }
 
 .footer-grid h3 {
@@ -1225,7 +1236,6 @@ footer .sifa-social-links a svg, .site-footer .sifa-social-links a svg {
     cursor: pointer;
   }
 }
-}
 
 
 /* SIFA mobile navigation fix */
@@ -1270,5 +1280,66 @@ footer .sifa-social-links a svg, .site-footer .sifa-social-links a svg {
     display: block;
     width: 100%;
     box-sizing: border-box;
+  }
+}
+
+
+/* CONTACT PAGE ONLY: show every navigation link directly on mobile */
+@media (max-width: 900px) {
+  body.contact-page header > .container.nav {
+    min-height: 78px;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 8px;
+    padding-bottom: 12px;
+  }
+
+  body.contact-page header .menu {
+    display: none !important;
+  }
+
+  body.contact-page header nav {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    order: 3;
+  }
+
+  body.contact-page header nav ul,
+  body.contact-page header nav ul.open {
+    display: flex !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 8px 0 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    overflow: visible !important;
+  }
+
+  body.contact-page header nav ul li,
+  body.contact-page header nav ul li a {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  body.contact-page header nav ul li a {
+    padding: 10px 12px !important;
+    white-space: normal !important;
+  }
+
+  body.contact-page header nav ul li a.nav-cta {
+    display: inline-block !important;
+    width: auto !important;
+    margin-top: 8px !important;
   }
 }

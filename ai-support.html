@@ -34,6 +34,14 @@
 .ai-clear{background:#e8eef4;color:#0d2b50}
 .ai-answer{display:none;margin-top:20px;padding:18px;border-radius:13px;background:#f4f8fb;border:1px solid #dbe5ee;line-height:1.7;color:#243447}
 .ai-answer.show{display:block}
+.ai-conversation{display:grid;gap:14px;padding:20px 24px;border-bottom:1px solid #e5ebf1;max-height:520px;overflow:auto;background:#fff}
+.ai-message{max-width:92%;padding:13px 16px;border-radius:14px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.ai-message.user{justify-self:end;background:#0d2b50;color:#fff;border-bottom-right-radius:4px}
+.ai-message.assistant{justify-self:start;background:#f1f6fa;color:#243447;border:1px solid #dbe5ee;border-bottom-left-radius:4px}
+.ai-message small{display:block;font-weight:800;opacity:.75;margin-bottom:4px}
+.ai-edit-message{display:inline-block;margin-top:8px;padding:5px 10px;border:1px solid currentColor;border-radius:7px;background:transparent;color:inherit;font-size:12px;cursor:pointer;opacity:.85}
+.ai-edit-message:hover{opacity:1}
+.ai-memory-note{padding:0 24px 12px;font-size:12px;color:#64748b}
 .ai-answer strong{color:#071a33}
 .ai-status{margin-top:14px;font-size:13px;color:#64748b}
 
@@ -112,15 +120,15 @@
       <div class="ai-chat" style="max-width:980px;margin:0 auto;width:100%;">
         <div class="ai-chat-head">
           <h2>SIFA AI Learning Assistant</h2>
-          <p>Ask your question naturally. You do not need to choose a category or use a suggested question.</p>
         </div>
 
+        <div class="ai-conversation" id="aiConversation" aria-live="polite" aria-label="Conversation history"></div>
         <form class="ai-form" id="aiForm">
           <label for="question">Ask SIFA AI anything about SIFA or its learning areas</label>
           <textarea id="question" placeholder="Type your question here..."></textarea>
           <div class="ai-actions">
             <button class="ai-ask" type="submit">Ask SIFA AI</button>
-            <button class="ai-clear" type="button" id="clearQuestion">Clear</button>
+            <button class="ai-clear" type="button" id="clearQuestion">Clear conversation</button>
           </div>
           <div class="ai-status">SIFA AI uses SIFA's structured knowledge and educational guidance. For official decisions or private records, SIFA will direct you to official support.</div>
           <div class="ai-answer" id="aiAnswer" aria-live="polite"></div>
@@ -239,6 +247,28 @@ const SIFA_KNOWLEDGE = [
   {terms:["privacy","data protection","personal data","information security"],answer:"SIFA provides a Privacy Policy for website users and applicants. SIFA AI should never expose private student or applicant information."},
   {terms:["online course","online learning","remote learning","distance learning","zoom","google meet"],answer:"SIFA is designed for practical and accessible learning, including online delivery where applicable. The exact platform and schedule depend on the program and intake."},
   {terms:["future courses","future plans","coming soon","future programs"],answer:"SIFA's future direction includes expanding practical financial technology education, accounting software, enterprise systems, digital professional tools, advanced Excel, business intelligence, and other relevant technology programs as capacity, partnerships, licensing, and learner demand develop."}
+  ,{terms:["debit","credit","double entry","double-entry bookkeeping"],answer:"Double-entry bookkeeping records each transaction in at least two accounts: total debits must equal total credits. A debit increases assets and expenses and usually decreases liabilities, equity, and revenue; a credit generally does the opposite. The exact effect depends on the account type."}
+  ,{terms:["assets","liabilities","equity","accounting equation"],answer:"The basic accounting equation is Assets = Liabilities + Owner's Equity. Assets are resources controlled by a business, liabilities are obligations it owes, and equity is the residual interest after liabilities are deducted from assets."}
+  ,{terms:["income statement","profit and loss","p&l"],answer:"An income statement summarizes revenue and expenses over a period and shows whether the business made a profit or loss. A simple form is Revenue − Expenses = Net Profit (or Loss)."}
+  ,{terms:["balance sheet","statement of financial position"],answer:"A balance sheet (statement of financial position) shows assets, liabilities, and equity at a specific date. It follows the accounting equation: Assets = Liabilities + Equity."}
+  ,{terms:["cash flow statement","cash flows","operating investing financing"],answer:"A cash-flow statement explains changes in cash, commonly grouped into operating, investing, and financing activities. Profit and cash flow are not the same because of non-cash items and timing differences."}
+  ,{terms:["accrual accounting","cash basis","cash accounting"],answer:"Cash-basis accounting records income and expenses when cash is received or paid. Accrual accounting generally records revenue when earned and expenses when incurred, even if cash moves at another time."}
+  ,{terms:["depreciation","straight line depreciation"],answer:"Depreciation allocates the depreciable cost of a tangible fixed asset over its useful life. Under straight-line depreciation, annual depreciation is commonly (Cost − Residual Value) ÷ Useful Life. Apply the relevant accounting rules and local tax requirements."}
+  ,{terms:["inventory","stock valuation","fifo","lifo","weighted average"],answer:"Inventory is goods held for sale or materials used to produce goods. Common cost formulas include FIFO and weighted average; the permitted method depends on the applicable accounting framework. Track quantities, costs, purchases, and sales consistently."}
+  ,{terms:["trial balance","ledger","journal entry"],answer:"A journal entry records a transaction with accounts and debit/credit amounts. Entries are posted to the ledger, and a trial balance lists account balances to check that total debits equal total credits. Equal totals do not guarantee that every transaction is correct."}
+  ,{terms:["vat","value added tax","sales tax","tax rate"],answer:"VAT and sales-tax rules vary by country, transaction type, and current law. I can explain the general concept or show a calculation if you provide the applicable rate, but confirm filing obligations and current rates with the relevant tax authority or a qualified professional."}
+  ,{terms:["quickbooks","xero","sage accounting","tally","zoho books","odoo"],answer:"QuickBooks, Xero, Sage, Tally, Zoho Books, and Odoo are examples of accounting or business-management software. Typical workflows include setting up accounts, recording invoices and bills, reconciling bank activity, tracking customers and suppliers, and preparing reports. Features and availability vary by product and plan."}
+  ,{terms:["programming","algorithm","coding","computer program"],answer:"Programming is writing instructions that a computer can execute. An algorithm is a clear sequence of steps for solving a problem; code expresses those steps in a programming language. Beginners can start with variables, data types, input/output, conditions, loops, and functions."}
+  ,{terms:["c language","language c","printf","scanf","int main"],answer:"C is a general-purpose programming language. A basic C program commonly includes #include <stdio.h>, a main function, statements, and a return value. printf displays output; scanf can read input when used with the correct format specifier and address."}
+  ,{terms:["if statement","condition","conditional statement","else","switch"],answer:"A conditional statement chooses which code runs based on a condition. In C, if (condition) runs a block when the condition is true; else handles the alternative. Use == to compare values and = to assign a value."}
+  ,{terms:["loop","for loop","while loop","nested loop"],answer:"A loop repeats instructions. A for loop is useful when initialization, a condition, and an update are grouped together; while repeats while its condition is true. Nested loops place one loop inside another, so the inner loop runs for each iteration of the outer loop."}
+  ,{terms:["function in programming","function parameters","return value"],answer:"A function is a named block of code that performs a task. Parameters provide input, and a return value sends a result back to the caller. Functions help organize code and reduce repetition."}
+  ,{terms:["binary","binary number","decimal to binary","number system"],answer:"Binary is base 2 and uses only digits 0 and 1. Decimal is base 10. To convert a positive decimal integer to binary, repeatedly divide by 2, record each remainder, then read the remainders from last to first."}
+  ,{terms:["excel formula","spreadsheet","cell reference"],answer:"In Excel, formulas begin with =. A cell reference such as A1 identifies a cell; a range such as A1:A10 identifies a group. Common functions include SUM, AVERAGE, IF, COUNTIF, XLOOKUP, and PivotTables for summarizing data."}
+  ,{terms:["cybersecurity","password safety","phishing","online security"],answer:"Good cybersecurity habits include using unique passwords with a password manager, enabling multi-factor authentication, updating devices, verifying unexpected links and attachments, and never sharing passwords or one-time codes. Contact the official service through a trusted route if a message seems suspicious."}
+  ,{terms:["business plan","marketing","entrepreneurship","business idea"],answer:"A practical business plan explains the customer problem, target market, offer, pricing, competitors, operations, marketing, costs, revenue assumptions, risks, and milestones. Validate assumptions with customer research and realistic financial estimates."}
+  ,{terms:["study tips","how to learn","remember lessons","exam preparation"],answer:"A useful study routine is to break a topic into small goals, learn one concept, work through a solved example, solve a similar problem without looking, check mistakes, and revisit it later. Active recall and spaced practice usually work better than rereading alone."}
+
 ];
 
 const QUICK_RESPONSES = [
@@ -246,6 +276,24 @@ const QUICK_RESPONSES = [
   {test:q=>/\b(thank you|thanks|thank u)\b/i.test(q), answer:"You're welcome! If you have another SIFA, accounting, finance, Excel, or technology question, feel free to ask."},
   {test:q=>/\b(who are you|what are you)\b/i.test(q), answer:"I’m SIFA AI, the learning-support assistant on the SIFA Global Institute website. I provide SIFA information and general educational guidance. I do not make official admission, fee, scholarship, certificate, or student-record decisions."}
 ];
+
+
+/* Additional built-in guidance for widely used accounting and business systems.
+   This remains offline/static knowledge; it does not imply live access to each product. */
+SIFA_KNOWLEDGE.push(
+ {terms:["quickbooks online","quickbooks desktop","quickbooks accounting software"],answer:"QuickBooks is accounting software used for tasks such as invoicing, expense tracking, bank reconciliation, reports, and (depending on edition and region) payroll and tax workflows. Exact menus and features vary by version, country, subscription, and permissions. Tell me your version and task for step-by-step guidance."},
+ {terms:["xero accounting software","xero bank reconciliation","xero invoices"],answer:"Xero is cloud accounting software commonly used for invoicing, bills, bank reconciliation, financial reports, and integrations. Features and tax options vary by country and plan. Describe the task and your region so I can tailor the instructions."},
+ {terms:["sage accounting","sage 50","sage business cloud"],answer:"Sage offers accounting and business-management products, including products for bookkeeping, invoicing, reporting, and payroll depending on edition and country. Tell me the exact Sage product and what you want to do; menus and compliance features can vary."},
+ {terms:["tally erp","tallyprime","tally accounting"],answer:"TallyPrime is business-management software widely used for accounting, inventory, invoicing, and tax-related workflows in supported regions. Configuration and statutory features depend on the country and version. Tell me your task and version for guided steps."},
+ {terms:["zoho books","zoho accounting"],answer:"Zoho Books is cloud accounting software for invoices, expenses, bank reconciliation, reports, and related workflows. Available features and tax settings vary by country and plan. I can explain a workflow if you describe the task."},
+ {terms:["odoo accounting","odoo erp","odoo business software"],answer:"Odoo is a modular business application platform with apps such as Accounting, Sales, Purchase, Inventory, CRM, and eCommerce. What is available depends on edition, version, installed apps, and configuration. Tell me which app and workflow you are using."},
+ {terms:["erp meaning","enterprise resource planning"],answer:"ERP means Enterprise Resource Planning. It integrates business processes such as finance, purchasing, inventory, sales, production, and human resources in a shared system. Examples include SAP, Oracle NetSuite, Microsoft Dynamics 365, and Odoo."},
+ {terms:["crm meaning","customer relationship management"],answer:"CRM means Customer Relationship Management. CRM systems help organizations manage leads, customer communication, sales pipelines, and customer support. Examples include Salesforce, HubSpot, Zoho CRM, and Microsoft Dynamics 365."},
+ {terms:["sap business one","sap s4hana","sap accounting"],answer:"SAP provides enterprise software for finance and many other business processes. SAP S/4HANA and SAP Business One serve different organizational needs. The exact steps depend on the product, version, roles, and configuration; describe your task for specific guidance."},
+ {terms:["oracle netsuite","netsuite accounting"],answer:"Oracle NetSuite is a cloud business-management suite that can include accounting, financial management, inventory, order management, CRM, and reporting. Modules and workflows vary by account configuration and permissions."},
+ {terms:["microsoft dynamics 365 finance","dynamics 365 business central"],answer:"Microsoft Dynamics 365 includes business applications such as Finance and Business Central. Capabilities and steps vary by product, release, enabled features, and user permissions. Tell me which product and task you mean."},
+ {terms:["accounting software comparison","compare accounting software"],answer:"To compare QuickBooks, Xero, Sage, Tally, Zoho Books, Odoo, SAP, NetSuite, or Dynamics 365, consider country-specific tax support, company size, inventory needs, integrations, user access, reporting, implementation effort, and total cost. Current prices and features can change, so verify them with the vendor."}
+);
 
 function normalize(text){
   return String(text).toLowerCase().normalize("NFKC").replace(/[’']/g,"'").replace(/[^\p{L}\p{N}\s+\-*/().=]/gu," ").replace(/\s+/g," ").trim();
@@ -258,9 +306,17 @@ function similarity(question, term){
   if(!q||!t) return 0;
   if(q===t) return 100;
   if(q.includes(t)) return 80 + Math.min(15,t.split(" ").length*3);
-  const qw=new Set(tokenize(q)), tw=tokenize(t);
-  const hits=tw.filter(w=>qw.has(w)).length;
-  return tw.length ? (hits/tw.length)*60 : 0;
+
+  // Match meaning-bearing words even when a visitor uses different English wording.
+  const stop = new Set(["what","which","where","when","who","why","how","can","could","would","should","do","does","did","is","are","am","was","were","the","a","an","to","for","of","in","on","at","and","or","please","tell","me","about","explain","give","show","want","know","help","with","my","your","it","this","that","i","you","we","they","their","from","as","be","have","has","had","make","made"]);
+  const words = text => tokenize(text).filter(w=>!stop.has(w));
+  const qw = new Set(words(q)), tw = words(t);
+  if(!qw.size || !tw.length) return 0;
+  const hits = tw.filter(w=>qw.has(w)).length;
+  const termCoverage = hits / tw.length;
+  const queryCoverage = hits / qw.size;
+  // Strongly reward matching a whole concept, but allow a long natural-language question.
+  return Math.max(termCoverage*65 + queryCoverage*25, hits >= 2 ? 38 + Math.min(hits,5)*5 : 0);
 }
 
 function findKnowledgeAnswer(question){
@@ -271,7 +327,7 @@ function findKnowledgeAnswer(question){
       if(s>best.score) best={item,score:s};
     }
   }
-  return best.score>=34 ? best.item.answer : null;
+  return best.score>=30 ? best.item.answer : null;
 }
 
 function tryCalculator(question){
@@ -298,7 +354,16 @@ function genericEducationalAnswer(question){
   if(/\b(compare|difference between|versus|vs)\b/.test(q)){
     return "I can compare the two items by purpose, main features, advantages, limitations, cost considerations, and suitability. Please name the two items you want compared.";
   }
-  return "I can help with SIFA information and with general accounting, finance, bookkeeping, Excel, accounting software, financial technology, business, reporting, and professional-learning questions. I don't want to invent an official SIFA fact. For a current fee, intake, scholarship, admission decision, certificate decision, or private student matter, please contact SIFA directly. For an educational question, ask it in your own words and I’ll explain it step by step.";
+  if(/\b(why|reason|cause)\b/.test(q)){
+    return "To explain the reason accurately, I need the specific situation or concept. Share a little context and I can break down the likely causes, how to check them, and a practical example.";
+  }
+  if(/\b(example|examples)\b/.test(q)){
+    return "I can give a worked example. Please name the exact concept or task; I’ll show the steps, explain why each step is used, and summarize the result.";
+  }
+  if(/\b(translate|translation|in arabic|in english|in french|in turkish|kinyarwanda)\b/.test(q)){
+    return "I can help with common translations and explain technical terms. Please provide the exact word or sentence and specify the target language so I can translate it in context.";
+  }
+  return "I can help you explore this question. My built-in knowledge covers SIFA Global Institute, accounting, bookkeeping, financial reporting, tax and audit concepts, budgeting, payroll, business management, Excel, QuickBooks, Xero, Sage, TallyPrime, Zoho Books, Odoo, SAP, Oracle NetSuite, Microsoft Dynamics 365, ERP and CRM systems, databases, programming, cybersecurity, AI concepts, marketing, entrepreneurship, mathematics, science, languages, and study skills. If my first interpretation misses your meaning, try describing the task in your own words, naming the software or topic, or sharing an example; I will use the conversation context to narrow it down. This offline version has a fixed knowledge base, so it cannot guarantee a correct answer to every possible question or provide live/current information. I will not invent official SIFA facts, current prices, admission decisions, or private student information.";
 }
 
 function getAnswer(question){
@@ -307,20 +372,112 @@ function getAnswer(question){
   return findKnowledgeAnswer(question) || genericEducationalAnswer(question);
 }
 
+const SIFA_CHAT_STORAGE_KEY = "sifa_ai_conversation_v1";
+const conversationEl = document.getElementById("aiConversation");
+const questionEl = document.getElementById("question");
+let conversation = [];
+
+function loadConversation(){
+  try {
+    const saved = localStorage.getItem(SIFA_CHAT_STORAGE_KEY);
+    const parsed = saved ? JSON.parse(saved) : [];
+    if(Array.isArray(parsed)) conversation = parsed.filter(m =>
+      m && (m.role === "user" || m.role === "assistant") && typeof m.text === "string"
+    ).slice(-80);
+  } catch(e) { conversation = []; }
+  renderConversation();
+}
+
+function saveConversation(){
+  try { localStorage.setItem(SIFA_CHAT_STORAGE_KEY, JSON.stringify(conversation.slice(-80))); }
+  catch(e) { /* Private browsing or storage restrictions: conversation remains until page reload. */ }
+}
+
+function renderConversation(){
+  conversationEl.replaceChildren();
+  if(!conversation.length){
+    const welcome = document.createElement("div");
+    welcome.className = "ai-message assistant";
+    const label = document.createElement("small");
+    label.textContent = "SIFA AI";
+    const body = document.createElement("div");
+    body.textContent = "Hello! I’m SIFA AI. Ask a question, then continue with follow-up questions in the same conversation. Your conversation is saved in this browser on this device.";
+    welcome.append(label, body);
+    conversationEl.appendChild(welcome);
+    return;
+  }
+  conversation.forEach((message, index) => {
+    const bubble = document.createElement("div");
+    bubble.className = "ai-message " + message.role;
+    const label = document.createElement("small");
+    label.textContent = message.role === "user" ? "You" : "SIFA AI";
+    const body = document.createElement("div");
+    body.textContent = message.text;
+    bubble.append(label, body);
+    if(message.role === "user"){
+      const edit = document.createElement("button");
+      edit.type = "button";
+      edit.className = "ai-edit-message";
+      edit.textContent = "Edit message";
+      edit.setAttribute("aria-label", "Edit your message");
+      edit.addEventListener("click", function(){
+        // Remove this question and later replies so the corrected question can be answered afresh.
+        conversation = conversation.slice(0, index);
+        saveConversation();
+        renderConversation();
+        questionEl.value = message.text;
+        questionEl.focus();
+        questionEl.setSelectionRange(questionEl.value.length, questionEl.value.length);
+      });
+      bubble.appendChild(edit);
+    }
+    conversationEl.appendChild(bubble);
+  });
+  conversationEl.scrollTop = conversationEl.scrollHeight;
+}
+
+function getContextualAnswer(question){
+  const q = normalize(question);
+  const followup = /^(and|also|what about|why|how|explain more|tell me more|continue|give an example|an example|what does that mean|can you explain that|more)\b/i.test(q);
+  const previousUser = [...conversation].reverse().find(m => m.role === "user");
+  if(followup && previousUser){
+    const previousAnswer = [...conversation].reverse().find(m => m.role === "assistant");
+    const focused = previousUser.text + " " + question;
+    const answer = getAnswer(focused);
+    if(answer && !answer.startsWith("I searched SIFA AI’s built-in knowledge")){
+      return answer;
+    }
+    return "Continuing from your previous question (“" + previousUser.text + "”): " +
+      (previousAnswer ? previousAnswer.text + "\n\n" : "") +
+      "Please tell me which part you want me to expand, and I’ll continue from this discussion. Note: this version remembers the conversation but does not yet use a full generative AI model.";
+  }
+  return getAnswer(question);
+}
+
 document.getElementById("aiForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const q=document.getElementById("question").value.trim();
-  const a=document.getElementById("aiAnswer");
-  if(!q){a.innerHTML="<strong>Please enter a question.</strong>";}
-  else{a.textContent=getAnswer(q);}
-  a.classList.add("show");
+  const q = questionEl.value.trim();
+  if(!q) { questionEl.focus(); return; }
+  const answer = getContextualAnswer(q);
+  conversation.push({role:"user", text:q}, {role:"assistant", text:answer});
+  conversation = conversation.slice(-80);
+  saveConversation();
+  renderConversation();
+  questionEl.value = "";
+  questionEl.focus();
 });
 
 document.getElementById("clearQuestion").addEventListener("click", function(){
-  document.getElementById("question").value="";
-  document.getElementById("aiAnswer").classList.remove("show");
-  document.getElementById("question").focus();
+  const confirmed = window.confirm("Clear this SIFA AI conversation from this browser?");
+  if(!confirmed) return;
+  conversation = [];
+  saveConversation();
+  renderConversation();
+  questionEl.value = "";
+  questionEl.focus();
 });
+
+loadConversation();
 
 // Allow Ctrl+Enter to submit the question quickly.
 document.getElementById("question").addEventListener("keydown",function(e){
