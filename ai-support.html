@@ -366,10 +366,63 @@ function genericEducationalAnswer(question){
   return "I can help you explore this question. My built-in knowledge covers SIFA Global Institute, accounting, bookkeeping, financial reporting, tax and audit concepts, budgeting, payroll, business management, Excel, QuickBooks, Xero, Sage, TallyPrime, Zoho Books, Odoo, SAP, Oracle NetSuite, Microsoft Dynamics 365, ERP and CRM systems, databases, programming, cybersecurity, AI concepts, marketing, entrepreneurship, mathematics, science, languages, and study skills. If my first interpretation misses your meaning, try describing the task in your own words, naming the software or topic, or sharing an example; I will use the conversation context to narrow it down. This offline version has a fixed knowledge base, so it cannot guarantee a correct answer to every possible question or provide live/current information. I will not invent official SIFA facts, current prices, admission decisions, or private student information.";
 }
 
+
+function detectSifaLanguage(text){
+  const s=String(text||"");
+  if(/[؀-ۿ]/.test(s)) return "ar";
+  const q=normalize(s);
+  if(/\b(bonjour|merci|comment|pourquoi|comptable|comptabilite|entreprise|reponds|francais)\b/.test(q)) return "fr";
+  if(/\b(merhaba|tesekkur|nasıl|neden|muhasebe|isletme|turkce|cevapla)\b/.test(q)) return "tr";
+  if(/\b(muraho|urakoze|ese|nshaka|ubucuruzi|ibaruramari|kinyarwanda)\b/.test(q)) return "rw";
+  if(/\b(hola|gracias|contabilidad|empresa|espanol|responde)\b/.test(q)) return "es";
+  if(/\b(olá|obrigado|contabilidade|empresa|portugues)\b/.test(q)) return "pt";
+  if(/\b(hujambo|asante|tafadhali|uhasibu|biashara|kiswahili)\b/.test(q)) return "sw";
+  return "en";
+}
+
+function founderContactAnswer(question){
+  const q=normalize(question);
+  return /\b(founder|ceo|founder assistance|speak to founder|contact founder|official decision|admission decision|partnership|complaint|complain|certificate issue|certificate verification problem|speak to a person|human support|real person|talk to someone)\b/.test(q);
+}
+
+function localizedFounderMessage(lang){
+  const messages = {
+    en:"This request may need assistance from SIFA Global Institute's founder or team. Email: info.sifaglobal@yahoo.com. WhatsApp: https://wa.me/250782817643. Please include a clear description of your question. Official decisions must be confirmed by SIFA directly.",
+    ar:"قد يحتاج هذا الطلب إلى مساعدة مؤسس أو فريق SIFA Global Institute. البريد الإلكتروني: info.sifaglobal@yahoo.com. واتساب: https://wa.me/250782817643. يرجى شرح طلبك بوضوح. يجب تأكيد القرارات الرسمية مباشرةً من SIFA.",
+    fr:"Cette demande peut nécessiter l’aide du fondateur ou de l’équipe de SIFA Global Institute. E-mail : info.sifaglobal@yahoo.com. WhatsApp : https://wa.me/250782817643. Décrivez clairement votre demande. Les décisions officielles doivent être confirmées directement par SIFA.",
+    tr:"Bu konu SIFA Global Institute kurucusunun veya ekibinin yardımını gerektirebilir. E-posta: info.sifaglobal@yahoo.com. WhatsApp: https://wa.me/250782817643. Lütfen sorunuzu açıkça açıklayın. Resmî kararlar doğrudan SIFA tarafından doğrulanmalıdır.",
+    rw:"Iki kibazo gishobora gusaba ubufasha bw’uwashinze SIFA Global Institute cyangwa itsinda ryayo. Imeyili: info.sifaglobal@yahoo.com. WhatsApp: https://wa.me/250782817643. Sobanura neza ikibazo cyawe. Ibyemezo byemewe bigomba kwemezwa na SIFA ubwayo.",
+    es:"Esta solicitud puede requerir ayuda del fundador o del equipo de SIFA Global Institute. Correo: info.sifaglobal@yahoo.com. WhatsApp: https://wa.me/250782817643. Describe claramente tu consulta. SIFA debe confirmar directamente las decisiones oficiales.",
+    pt:"Este pedido pode exigir ajuda do fundador ou da equipa da SIFA Global Institute. E-mail: info.sifaglobal@yahoo.com. WhatsApp: https://wa.me/250782817643. Descreva claramente a sua questão. As decisões oficiais devem ser confirmadas diretamente pela SIFA.",
+    sw:"Ombi hili linaweza kuhitaji msaada wa mwanzilishi au timu ya SIFA Global Institute. Barua pepe: info.sifaglobal@yahoo.com. WhatsApp: https://wa.me/250782817643. Eleza swali lako kwa uwazi. Maamuzi rasmi lazima yathibitishwe moja kwa moja na SIFA."
+  };
+  return messages[lang] || messages.en;
+}
+
+function multilingualFallback(lang){
+  const messages = {
+    en:"I may not have a ready-made answer for that exact wording yet. I can still try to help: rephrase the question, include a related keyword, or tell me the subject and what you want to achieve. I can assist with SIFA information and general learning topics, but this offline version does not have live web access or the full capabilities of a generative AI model.",
+    ar:"قد لا أملك إجابة جاهزة لهذه الصياغة تحديدًا، لكن يمكنني محاولة مساعدتك. أعد صياغة السؤال أو اذكر كلمة مرتبطة بالموضوع والنتيجة التي تريدها. يمكنني المساعدة في معلومات SIFA والموضوعات التعليمية العامة، لكن هذه النسخة غير المتصلة لا تملك وصولًا مباشرًا إلى الإنترنت ولا قدرات نموذج ذكاء اصطناعي توليدي كامل.",
+    fr:"Je n’ai peut-être pas encore de réponse prête pour cette formulation précise. Reformulez la question, ajoutez un mot-clé lié au sujet ou expliquez votre objectif. Cette version hors ligne peut aider sur les informations de SIFA et des sujets éducatifs généraux, mais elle n’a pas d’accès Internet en direct ni toutes les capacités d’un modèle d’IA générative.",
+    tr:"Bu soru biçimi için hazır bir yanıtım olmayabilir. Soruyu farklı şekilde yazın, ilgili bir anahtar kelime ekleyin veya hedefinizi açıklayın. Bu çevrimdışı sürüm SIFA bilgileri ve genel eğitim konularında yardımcı olabilir; ancak canlı internet erişimi veya tam üretken yapay zekâ yetenekleri yoktur.",
+    rw:"Sinshobora kuba mfite igisubizo cyateguwe kuri ubu buryo bw’ikibazo. Gerageza kukibaza mu bundi buryo, wongereho ijambo rifitanye isano, cyangwa usobanure icyo ushaka kugeraho. Iyi verisiyo idakoresha internet ishobora gufasha ku makuru ya SIFA no ku masomo rusange, ariko ntifite ubushobozi bwose bwa AI igezweho.",
+    es:"Puede que todavía no tenga una respuesta preparada para esa formulación exacta. Reformula la pregunta, añade una palabra clave relacionada o explica tu objetivo. Esta versión sin conexión puede ayudar con información de SIFA y temas educativos generales, pero no tiene acceso web en directo ni todas las capacidades de una IA generativa.",
+    pt:"Talvez eu ainda não tenha uma resposta pronta para esta formulação exata. Reformule a pergunta, inclua uma palavra-chave relacionada ou explique o seu objetivo. Esta versão offline pode ajudar com informações da SIFA e temas educativos gerais, mas não tem acesso à web em tempo real nem todas as capacidades de uma IA generativa.",
+    sw:"Huenda sina jibu lililo tayari kwa namna hii ya kuuliza. Uliza kwa maneno tofauti, ongeza neno muhimu linalohusiana, au eleza unachotaka kufanikisha. Toleo hili lisilo na mtandao linaweza kusaidia kuhusu SIFA na masomo ya jumla, lakini halina ufikiaji wa moja kwa moja wa wavuti au uwezo wote wa AI ya kisasa."
+  };
+  return messages[lang] || messages.en;
+}
+
 function getAnswer(question){
+  const lang = detectSifaLanguage(question);
+  if(founderContactAnswer(question)) return localizedFounderMessage(lang);
   for(const item of QUICK_RESPONSES){if(item.test(question)) return item.answer;}
   const calc=tryCalculator(question); if(calc) return calc;
-  return findKnowledgeAnswer(question) || genericEducationalAnswer(question);
+  const known = findKnowledgeAnswer(question);
+  if(known) return known;
+  const generic = genericEducationalAnswer(question);
+  if(generic && !generic.startsWith("I searched SIFA AI")) return generic;
+  return multilingualFallback(lang);
 }
 
 const SIFA_CHAT_STORAGE_KEY = "sifa_ai_conversation_v1";

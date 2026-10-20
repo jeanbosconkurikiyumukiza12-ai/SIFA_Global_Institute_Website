@@ -1,44 +1,49 @@
 
 
-// SIFA mobile navigation menu
+// SIFA mobile navigation menu — shared by all pages
 function initializeSifaMenu() {
-  const menu = document.querySelector('header .menu');
-  const nav = document.querySelector('header nav ul');
-
-  if (!menu || !nav) return;
-
-  menu.type = 'button';
+  const header = document.querySelector("header");
+  const menu = header?.querySelector(".menu");
+  const nav = header?.querySelector("nav");
+  const list = nav?.querySelector("ul");
+  if (!header || !menu || !nav || !list || menu.dataset.sifaMenuReady === "true") return;
+  menu.dataset.sifaMenuReady = "true";
+  menu.type = "button";
+  menu.setAttribute("aria-controls", "sifa-main-navigation");
+  list.id = list.id || "sifa-main-navigation";
 
   function setMenuOpen(isOpen) {
-    nav.classList.toggle('open', isOpen);
-    menu.setAttribute('aria-expanded', String(isOpen));
-    menu.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    menu.textContent = isOpen ? '✕' : '☰';
+    list.classList.toggle("open", isOpen);
+    menu.setAttribute("aria-expanded", String(isOpen));
+    menu.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    menu.textContent = isOpen ? "✕" : "☰";
   }
 
   setMenuOpen(false);
+  menu.addEventListener("click", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    setMenuOpen(!list.classList.contains("open"));
+  });
 
-menu.addEventListener('click', function (event) {
-  event.preventDefault();
-  event.stopPropagation();
+  list.addEventListener("click", function (event) {
+    if (event.target.closest("a")) setMenuOpen(false);
+  });
 
-  const isOpen = nav.classList.contains('open');
-  setMenuOpen(!isOpen);
-});
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") setMenuOpen(false);
+  });
 
-  nav.addEventListener('click', function (event) {
-    if (event.target.closest('a')) {
-      setMenuOpen(false);
-    }
+  document.addEventListener("click", function(event) {
+    if (!header.contains(event.target)) setMenuOpen(false);
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeSifaMenu);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeSifaMenu);
 } else {
   initializeSifaMenu();
 }
-
 
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
