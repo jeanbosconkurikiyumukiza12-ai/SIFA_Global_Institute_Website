@@ -42,6 +42,13 @@
 .ai-edit-message{display:inline-block;margin-top:8px;padding:5px 10px;border:1px solid currentColor;border-radius:7px;background:transparent;color:inherit;font-size:12px;cursor:pointer;opacity:.85}
 .ai-edit-message:hover{opacity:1}
 .ai-memory-note{padding:0 24px 12px;font-size:12px;color:#64748b}
+.ai-clear-dialog{display:none;margin:12px 24px 18px;padding:16px;border:1px solid #dbe5ee;border-radius:12px;background:#f8fbfd}
+.ai-clear-dialog.open{display:block}
+.ai-clear-dialog p{margin:0 0 12px;color:#243447;line-height:1.5}
+.ai-clear-dialog-actions{display:flex;gap:10px;flex-wrap:wrap}
+.ai-clear-dialog button{border:0;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer}
+.ai-clear-confirm{background:#b42318;color:#fff}
+.ai-clear-cancel{background:#e8eef4;color:#243447}
 .ai-answer strong{color:#071a33}
 .ai-status{margin-top:14px;font-size:13px;color:#64748b}
 
@@ -123,6 +130,13 @@
         </div>
 
         <div class="ai-conversation" id="aiConversation" aria-live="polite" aria-label="Conversation history"></div>
+        <div class="ai-clear-dialog" id="clearConversationDialog" role="dialog" aria-modal="false" aria-labelledby="clearConversationTitle">
+          <p id="clearConversationTitle"><strong>Clear conversation?</strong><br>This will remove the messages saved in this browser. This action cannot be undone.</p>
+          <div class="ai-clear-dialog-actions">
+            <button class="ai-clear-confirm" type="button" id="confirmClearConversation">Clear conversation</button>
+            <button class="ai-clear-cancel" type="button" id="cancelClearConversation">Keep conversation</button>
+          </div>
+        </div>
         <form class="ai-form" id="aiForm">
           <label for="question">Ask SIFA AI anything about SIFA or its learning areas</label>
           <textarea id="question" placeholder="Type your question here..."></textarea>
@@ -130,7 +144,7 @@
             <button class="ai-ask" type="submit">Ask SIFA AI</button>
             <button class="ai-clear" type="button" id="clearQuestion">Clear conversation</button>
           </div>
-          <div class="ai-status">SIFA AI uses SIFA's structured knowledge and educational guidance. For official decisions or private records, SIFA will direct you to official support.</div>
+          <div class="ai-status">SIFA AI provides educational guidance from its built-in knowledge. For official SIFA decisions or private records, contact SIFA directly.</div>
           <div class="ai-answer" id="aiAnswer" aria-live="polite"></div>
         </form>
       </div>
@@ -401,20 +415,40 @@ function localizedFounderMessage(lang){
 
 function multilingualFallback(lang){
   const messages = {
-    en:"I may not have a ready-made answer for that exact wording yet. I can still try to help: rephrase the question, include a related keyword, or tell me the subject and what you want to achieve. I can assist with SIFA information and general learning topics, but this offline version does not have live web access or the full capabilities of a generative AI model.",
-    ar:"قد لا أملك إجابة جاهزة لهذه الصياغة تحديدًا، لكن يمكنني محاولة مساعدتك. أعد صياغة السؤال أو اذكر كلمة مرتبطة بالموضوع والنتيجة التي تريدها. يمكنني المساعدة في معلومات SIFA والموضوعات التعليمية العامة، لكن هذه النسخة غير المتصلة لا تملك وصولًا مباشرًا إلى الإنترنت ولا قدرات نموذج ذكاء اصطناعي توليدي كامل.",
-    fr:"Je n’ai peut-être pas encore de réponse prête pour cette formulation précise. Reformulez la question, ajoutez un mot-clé lié au sujet ou expliquez votre objectif. Cette version hors ligne peut aider sur les informations de SIFA et des sujets éducatifs généraux, mais elle n’a pas d’accès Internet en direct ni toutes les capacités d’un modèle d’IA générative.",
-    tr:"Bu soru biçimi için hazır bir yanıtım olmayabilir. Soruyu farklı şekilde yazın, ilgili bir anahtar kelime ekleyin veya hedefinizi açıklayın. Bu çevrimdışı sürüm SIFA bilgileri ve genel eğitim konularında yardımcı olabilir; ancak canlı internet erişimi veya tam üretken yapay zekâ yetenekleri yoktur.",
-    rw:"Sinshobora kuba mfite igisubizo cyateguwe kuri ubu buryo bw’ikibazo. Gerageza kukibaza mu bundi buryo, wongereho ijambo rifitanye isano, cyangwa usobanure icyo ushaka kugeraho. Iyi verisiyo idakoresha internet ishobora gufasha ku makuru ya SIFA no ku masomo rusange, ariko ntifite ubushobozi bwose bwa AI igezweho.",
-    es:"Puede que todavía no tenga una respuesta preparada para esa formulación exacta. Reformula la pregunta, añade una palabra clave relacionada o explica tu objetivo. Esta versión sin conexión puede ayudar con información de SIFA y temas educativos generales, pero no tiene acceso web en directo ni todas las capacidades de una IA generativa.",
-    pt:"Talvez eu ainda não tenha uma resposta pronta para esta formulação exata. Reformule a pergunta, inclua uma palavra-chave relacionada ou explique o seu objetivo. Esta versão offline pode ajudar com informações da SIFA e temas educativos gerais, mas não tem acesso à web em tempo real nem todas as capacidades de uma IA generativa.",
-    sw:"Huenda sina jibu lililo tayari kwa namna hii ya kuuliza. Uliza kwa maneno tofauti, ongeza neno muhimu linalohusiana, au eleza unachotaka kufanikisha. Toleo hili lisilo na mtandao linaweza kusaidia kuhusu SIFA na masomo ya jumla, lakini halina ufikiaji wa moja kwa moja wa wavuti au uwezo wote wa AI ya kisasa."
+    en:"I’m sorry—I couldn’t find a reliable answer to that question in my current offline knowledge. For help with SIFA-specific information or a question that needs a human response, please contact the SIFA team: Email info.sifaglobal@yahoo.com, WhatsApp https://wa.me/250782817643, or visit the Contact page: https://sifaglobalinstitutewebsite.vercel.app/contact.html. You can also try asking in a different way or include an example.",
+    ar:"عذرًا، لم أتمكن من العثور على إجابة موثوقة لهذا السؤال ضمن معلوماتي الحالية. للمساعدة بشأن SIFA أو للحصول على رد من شخص مختص، تواصل مع فريق SIFA: البريد الإلكتروني info.sifaglobal@yahoo.com، واتساب https://wa.me/250782817643، أو صفحة الاتصال https://sifaglobalinstitutewebsite.vercel.app/contact.html. ويمكنك أيضًا إعادة صياغة السؤال أو إضافة مثال.",
+    fr:"Désolé, je n’ai pas trouvé de réponse fiable à cette question dans mes connaissances hors ligne actuelles. Pour une question concernant SIFA ou nécessitant une réponse humaine, contactez l’équipe SIFA : info.sifaglobal@yahoo.com, WhatsApp https://wa.me/250782817643, ou la page Contact https://sifaglobalinstitutewebsite.vercel.app/contact.html. Vous pouvez aussi reformuler la question ou ajouter un exemple.",
+    tr:"Üzgünüm, mevcut çevrimdışı bilgilerimde bu soru için güvenilir bir yanıt bulamadım. SIFA hakkında yardım veya bir ekip üyesinden yanıt almak için SIFA ile iletişime geçin: info.sifaglobal@yahoo.com, WhatsApp https://wa.me/250782817643 veya İletişim sayfası https://sifaglobalinstitutewebsite.vercel.app/contact.html. Soruyu farklı şekilde yazmayı veya örnek eklemeyi de deneyebilirsiniz.",
+    rw:"Mbabarira, sinabonye igisubizo cyizewe muri aya makuru mfite adakoresha internet. Ku kibazo kijyanye na SIFA cyangwa gisaba igisubizo cy’umuntu, hamagara itsinda rya SIFA kuri info.sifaglobal@yahoo.com, WhatsApp https://wa.me/250782817643, cyangwa usure urupapuro rw’itumanaho https://sifaglobalinstitutewebsite.vercel.app/contact.html. Ushobora no kubaza mu bundi buryo cyangwa gutanga urugero.",
+    es:"Lo siento, no encontré una respuesta fiable en mis conocimientos actuales sin conexión. Para consultas sobre SIFA o ayuda de una persona, contacta con el equipo de SIFA: info.sifaglobal@yahoo.com, WhatsApp https://wa.me/250782817643 o la página de contacto https://sifaglobalinstitutewebsite.vercel.app/contact.html. También puedes reformular la pregunta o añadir un ejemplo.",
+    pt:"Desculpe, não encontrei uma resposta fiável nas minhas informações offline atuais. Para questões sobre a SIFA ou ajuda de uma pessoa, contacte a equipa SIFA: info.sifaglobal@yahoo.com, WhatsApp https://wa.me/250782817643 ou a página de contacto https://sifaglobalinstitutewebsite.vercel.app/contact.html. Também pode reformular a pergunta ou dar um exemplo.",
+    sw:"Samahani, sijapata jibu la kuaminika katika maarifa yangu ya sasa yasiyotumia mtandao. Kwa msaada kuhusu SIFA au jibu kutoka kwa mtu, wasiliana na timu ya SIFA: info.sifaglobal@yahoo.com, WhatsApp https://wa.me/250782817643, au ukurasa wa mawasiliano https://sifaglobalinstitutewebsite.vercel.app/contact.html. Unaweza pia kuuliza kwa maneno tofauti au kutoa mfano."
   };
   return messages[lang] || messages.en;
 }
 
+
+function getSmallTalkAnswer(question, lang){
+  const q = normalize(question);
+  const greetings = /^(hi|hello|hey|good morning|good afternoon|good evening|how are you|how are you doing|what's up|whats up|bonjour|salut|ça va|cava|merhaba|selam|nasılsın|nasilsin|مرحبا|السلام عليكم|كيف حالك|أهلا|اهلا|muraho|amakuru|uraho|hola|buenos dias|buenas tardes|olá|ola|bom dia|tudo bem|hujambo|habari|jambo|asante|thank you|thanks|merci|teşekkürler|tesekkurler|شكرا|shukran|urakoze|gracias|obrigado|kwaheri|goodbye|bye|au revoir|adiós|adios|tchau)\s*[!.؟?]*$/i.test(q);
+  if(!greetings) return null;
+  const replies = {
+    en: /thank|thanks/.test(q) ? "You're welcome! What would you like help with today?" : /bye|goodbye/.test(q) ? "Goodbye! You can return whenever you need help." : "Hello! I'm doing well, thank you. I'm SIFA AI, here to help with SIFA information, accounting, business software, learning, and general questions. What would you like to know?",
+    ar: /شكرا|shukran/.test(q) ? "على الرحب والسعة! كيف يمكنني مساعدتك اليوم؟" : /كيف حالك/.test(q) ? "أنا بخير، شكرًا لسؤالك! كيف يمكنني مساعدتك اليوم؟" : "مرحبًا! أنا SIFA AI. يمكنني مساعدتك بمعلومات SIFA والمحاسبة وبرامج الأعمال والتعلّم وأسئلة عامة. كيف أساعدك؟",
+    fr: /merci/.test(q) ? "Avec plaisir ! Comment puis-je vous aider aujourd’hui ?" : /ça va|cava/.test(q) ? "Je vais bien, merci ! Comment puis-je vous aider aujourd’hui ?" : "Bonjour ! Je suis SIFA AI. Je peux vous aider avec SIFA, la comptabilité, les logiciels de gestion, l’apprentissage et des questions générales. Que souhaitez-vous savoir ?",
+    tr: /teşekkür|tesekkur/.test(q) ? "Rica ederim! Bugün size nasıl yardımcı olabilirim?" : /nasılsın|nasilsin/.test(q) ? "İyiyim, teşekkür ederim! Size nasıl yardımcı olabilirim?" : "Merhaba! Ben SIFA AI. SIFA, muhasebe, işletme yazılımları, öğrenme ve genel sorular hakkında yardımcı olabilirim. Size nasıl yardımcı olabilirim?",
+    rw: /urakoze/.test(q) ? "Murakoze nawe! Nagufasha iki uyu munsi?" : "Muraho! Ndi SIFA AI. Nshobora gufasha ku makuru ya SIFA, ibaruramari, porogaramu z’ubucuruzi, kwiga n’ibibazo rusange. Nagufasha iki?",
+    es: /gracias/.test(q) ? "¡De nada! ¿En qué puedo ayudarte hoy?" : "¡Hola! Soy SIFA AI. Puedo ayudarte con información de SIFA, contabilidad, software empresarial, aprendizaje y preguntas generales. ¿Qué te gustaría saber?",
+    pt: /obrigado/.test(q) ? "De nada! Como posso ajudar hoje?" : "Olá! Sou a SIFA AI. Posso ajudar com informações sobre a SIFA, contabilidade, software empresarial, aprendizagem e perguntas gerais. Como posso ajudar?",
+    sw: /asante/.test(q) ? "Karibu! Naweza kukusaidia nini leo?" : "Hujambo! Mimi ni SIFA AI. Ninaweza kusaidia kuhusu SIFA, uhasibu, programu za biashara, masomo na maswali ya jumla. Nikusaidie nini?"
+  };
+  return replies[lang] || replies.en;
+}
+
 function getAnswer(question){
   const lang = detectSifaLanguage(question);
+  const smallTalk = getSmallTalkAnswer(question, lang);
+  if(smallTalk) return smallTalk;
   if(founderContactAnswer(question)) return localizedFounderMessage(lang);
   for(const item of QUICK_RESPONSES){if(item.test(question)) return item.answer;}
   const calc=tryCalculator(question); if(calc) return calc;
@@ -425,14 +459,43 @@ function getAnswer(question){
   return multilingualFallback(lang);
 }
 
-const SIFA_CHAT_STORAGE_KEY = "sifa_ai_conversation_v1";
+const SIFA_CHAT_STORAGE_KEY = "sifa_ai_session_conversation_v1";
+const SIFA_CHAT_TIMEOUT_MS = 5 * 60 * 1000;
+let sifaChatTimeout = null;
 const conversationEl = document.getElementById("aiConversation");
 const questionEl = document.getElementById("question");
 let conversation = [];
 
+function clearSifaChatSession(){
+  conversation = [];
+  try {
+    sessionStorage.removeItem(SIFA_CHAT_STORAGE_KEY);
+    sessionStorage.removeItem(SIFA_CHAT_STORAGE_KEY + "_activity");
+  } catch(e) {}
+  if (sifaChatTimeout) clearTimeout(sifaChatTimeout);
+  renderConversation();
+}
+function resetSifaChatTimeout(){
+  if (sifaChatTimeout) clearTimeout(sifaChatTimeout);
+  sifaChatTimeout = setTimeout(clearSifaChatSession, SIFA_CHAT_TIMEOUT_MS);
+}
+["click","keydown","input","touchstart"].forEach(eventName => {
+  document.addEventListener(eventName, () => {
+    if (conversation.length) {
+      try { sessionStorage.setItem(SIFA_CHAT_STORAGE_KEY + "_activity", String(Date.now())); } catch(e) {}
+      resetSifaChatTimeout();
+    }
+  }, {passive:true});
+});
+
 function loadConversation(){
   try {
-    const saved = localStorage.getItem(SIFA_CHAT_STORAGE_KEY);
+    const lastActivity = Number(sessionStorage.getItem(SIFA_CHAT_STORAGE_KEY + "_activity") || 0);
+    if (lastActivity && Date.now() - lastActivity > SIFA_CHAT_TIMEOUT_MS) {
+      sessionStorage.removeItem(SIFA_CHAT_STORAGE_KEY);
+      sessionStorage.removeItem(SIFA_CHAT_STORAGE_KEY + "_activity");
+    }
+    const saved = sessionStorage.getItem(SIFA_CHAT_STORAGE_KEY);
     const parsed = saved ? JSON.parse(saved) : [];
     if(Array.isArray(parsed)) conversation = parsed.filter(m =>
       m && (m.role === "user" || m.role === "assistant") && typeof m.text === "string"
@@ -442,8 +505,33 @@ function loadConversation(){
 }
 
 function saveConversation(){
-  try { localStorage.setItem(SIFA_CHAT_STORAGE_KEY, JSON.stringify(conversation.slice(-80))); }
-  catch(e) { /* Private browsing or storage restrictions: conversation remains until page reload. */ }
+  try { sessionStorage.setItem(SIFA_CHAT_STORAGE_KEY, JSON.stringify(conversation.slice(-80)));
+    sessionStorage.setItem(SIFA_CHAT_STORAGE_KEY + "_activity", String(Date.now()));
+    resetSifaChatTimeout(); }
+  catch(e) { /* If session storage is unavailable, history remains in memory only. */ }
+}
+
+
+function appendMessageWithLinks(container, text){
+  const pattern = /(https:\/\/[^\s<]+|mailto:[^\s<]+|info\.sifaglobal@yahoo\.com)/gi;
+  const value = String(text || "");
+  let last = 0, match;
+  while((match = pattern.exec(value)) !== null){
+    if(match.index > last) container.appendChild(document.createTextNode(value.slice(last, match.index)));
+    let raw = match[0];
+    // Strip punctuation that should remain outside the link.
+    let trailing = "";
+    while(/[.,!?;:)\]]$/.test(raw)){ trailing = raw.slice(-1) + trailing; raw = raw.slice(0,-1); }
+    const a = document.createElement("a");
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.href = raw.toLowerCase() === "info.sifaglobal@yahoo.com" ? "mailto:info.sifaglobal@yahoo.com" : raw;
+    a.textContent = raw;
+    container.appendChild(a);
+    if(trailing) container.appendChild(document.createTextNode(trailing));
+    last = match.index + match[0].length;
+  }
+  if(last < value.length) container.appendChild(document.createTextNode(value.slice(last)));
 }
 
 function renderConversation(){
@@ -454,7 +542,7 @@ function renderConversation(){
     const label = document.createElement("small");
     label.textContent = "SIFA AI";
     const body = document.createElement("div");
-    body.textContent = "Hello! I’m SIFA AI. Ask a question, then continue with follow-up questions in the same conversation. Your conversation is saved in this browser on this device.";
+    body.textContent = "Hello! I’m SIFA AI. Ask me about SIFA, accounting, business software, learning, or general topics. You can continue the conversation and edit your messages.";
     welcome.append(label, body);
     conversationEl.appendChild(welcome);
     return;
@@ -465,7 +553,7 @@ function renderConversation(){
     const label = document.createElement("small");
     label.textContent = message.role === "user" ? "You" : "SIFA AI";
     const body = document.createElement("div");
-    body.textContent = message.text;
+    appendMessageWithLinks(body, message.text);
     bubble.append(label, body);
     if(message.role === "user"){
       const edit = document.createElement("button");
@@ -507,30 +595,104 @@ function getContextualAnswer(question){
   return getAnswer(question);
 }
 
-document.getElementById("aiForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const q = questionEl.value.trim();
-  if(!q) { questionEl.focus(); return; }
-  const answer = getContextualAnswer(q);
-  conversation.push({role:"user", text:q}, {role:"assistant", text:answer});
-  conversation = conversation.slice(-80);
-  saveConversation();
-  renderConversation();
-  questionEl.value = "";
-  questionEl.focus();
-});
+const aiForm = document.getElementById("aiForm");
+const askButton = aiForm ? aiForm.querySelector('button[type="submit"]') : null;
+const aiStatus = aiForm ? aiForm.querySelector(".ai-status") : null;
+let aiIsResponding = false;
 
+function submitSifaQuestion(event){
+  if(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  if(aiIsResponding) return false;
+  const q = questionEl.value.trim();
+  if(!q) {
+    if(aiStatus) aiStatus.textContent = "Please type a question before selecting Ask SIFA AI.";
+    questionEl.focus();
+    return false;
+  }
+  aiIsResponding = true;
+  if(askButton) {
+    askButton.disabled = true;
+    askButton.textContent = "Preparing answer…";
+  }
+  try {
+    const answer = getContextualAnswer(q);
+    conversation.push({role:"user", text:q}, {role:"assistant", text:String(answer || multilingualFallback(detectSifaLanguage(q)))});
+    conversation = conversation.slice(-80);
+    saveConversation();
+    renderConversation();
+    questionEl.value = "";
+    if(aiStatus) aiStatus.textContent = "SIFA AI has responded. You can ask a follow-up question.";
+    conversationEl.scrollIntoView({behavior:"smooth", block:"nearest"});
+  } catch(error) {
+    console.error("SIFA AI response error:", error);
+    if(aiStatus) aiStatus.textContent = "Sorry, SIFA AI encountered a problem preparing the answer. Please try again or contact SIFA at info.sifaglobal@yahoo.com or WhatsApp https://wa.me/250782817643.";
+  } finally {
+    aiIsResponding = false;
+    if(askButton) {
+      askButton.disabled = false;
+      askButton.textContent = "Ask SIFA AI";
+    }
+    questionEl.focus();
+  }
+  return false;
+}
+
+if(aiForm) {
+  aiForm.addEventListener("submit", submitSifaQuestion);
+  // Explicit click fallback ensures the visible Ask button invokes the same submit flow.
+  if(askButton) askButton.addEventListener("click", submitSifaQuestion);
+}
+
+const clearDialog = document.getElementById("clearConversationDialog");
 document.getElementById("clearQuestion").addEventListener("click", function(){
-  const confirmed = window.confirm("Clear this SIFA AI conversation from this browser?");
-  if(!confirmed) return;
+  clearDialog.classList.add("open");
+  document.getElementById("confirmClearConversation").focus();
+});
+document.getElementById("cancelClearConversation").addEventListener("click", function(){
+  clearDialog.classList.remove("open");
+  document.getElementById("clearQuestion").focus();
+});
+document.getElementById("confirmClearConversation").addEventListener("click", function(){
   conversation = [];
   saveConversation();
   renderConversation();
   questionEl.value = "";
+  clearDialog.classList.remove("open");
   questionEl.focus();
 });
 
 loadConversation();
+
+// Privacy: do not carry a visitor's chat to another section/page.
+// Clear the in-memory and session copy as soon as they navigate away,
+// leave the page, or hide the tab. The custom Clear Conversation dialog stays intact.
+function clearSifaChatBeforeLeaving(){
+  conversation = [];
+  try {
+    sessionStorage.removeItem(SIFA_CHAT_STORAGE_KEY);
+    sessionStorage.removeItem(SIFA_CHAT_STORAGE_KEY + "_activity");
+  } catch(e) {}
+  if (sifaChatTimeout) {
+    clearTimeout(sifaChatTimeout);
+    sifaChatTimeout = null;
+  }
+}
+document.addEventListener("click", function(event){
+  const link = event.target.closest("a[href]");
+  if (!link) return;
+  const href = link.getAttribute("href") || "";
+  const isExternalNavigation = link.target === "_blank" ||
+    /^(https?:|mailto:|tel:)/i.test(href) ||
+    (href && !href.startsWith("#") && !href.startsWith("javascript:"));
+  if (isExternalNavigation) clearSifaChatBeforeLeaving();
+}, true);
+window.addEventListener("pagehide", clearSifaChatBeforeLeaving);
+document.addEventListener("visibilitychange", function(){
+  if (document.visibilityState === "hidden") clearSifaChatBeforeLeaving();
+});
 
 // Allow Ctrl+Enter to submit the question quickly.
 document.getElementById("question").addEventListener("keydown",function(e){
