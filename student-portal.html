@@ -14,14 +14,37 @@
 .danger-zone{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px;padding:16px;border:1px solid #f0cccc;background:#fff8f8;border-radius:12px}.danger-zone strong{color:#8a2d2d}.danger-zone p{margin:4px 0 0;font-size:13px;color:#7b5b5b}.danger-btn{background:#fff!important;color:#8a2d2d!important;border:1px solid #d9aaaa!important}.closed-badge{background:#eef1f4!important;color:#5f6f7e!important}.application-subsection{margin-top:20px;padding-top:20px;border-top:1px solid #e5ebf0}.application-subsection h4{margin:0 0 12px;color:#071a33}.application-actions{display:flex;justify-content:flex-end;margin-top:18px}
 @media(max-width:560px){.danger-zone{align-items:stretch}.danger-zone .btn{width:100%}.application-actions{justify-content:stretch}.application-actions .btn{width:100%}}
 </style>
+
+<style id="sifa-streamlined-portal">
+/* Streamlined student dashboard: only two primary destinations */
+#studentDashboard .dashboard-grid,
+#studentDashboard > .application-card,
+#studentDashboard > .classroom-launch,
+#studentDashboard > .dashboard-actions {display:none!important}
+#studentDashboard .student-summary{margin-bottom:22px}
+.sifa-student-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:18px 0 24px}
+.sifa-student-action{border:1px solid #dce6ef;border-radius:18px;background:#fff;padding:24px;box-shadow:0 8px 24px rgba(8,30,54,.06)}
+.sifa-student-action h3{margin:0 0 8px;color:#0b2545;font-size:1.25rem}
+.sifa-student-action p{color:#53677b;line-height:1.6;margin:0 0 18px}
+.sifa-student-action .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+.sifa-detail-panel{border:1px solid #dce6ef;border-radius:16px;padding:22px;margin:18px 0;background:#fff}
+.sifa-detail-panel[hidden]{display:none!important}
+.sifa-detail-panel h3{margin-top:0;color:#0b2545}
+.sifa-action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.sifa-state{padding:13px 15px;border-radius:10px;background:#f5f8fb;border:1px solid #dce6ef;color:#30475c}
+.sifa-state.error{background:#fff5f5;border-color:#efcaca;color:#8a2d2d}
+.sifa-state.success{background:#f1faf5;border-color:#bfe2cc;color:#1d6a3d}
+@media(max-width:650px){.sifa-student-actions{grid-template-columns:1fr}.sifa-student-action{padding:19px}}
+</style>
+
 </head>
 <body>
-<div class="topbar"><div class="container"><span>Empowering Financial Professionals Through Technology</span><span>info.sifaglobal@yahoo.com</span></div></div>
+<div class="topbar"><div class="container"><span>Empowering Financial Professionals Through Technology</span><span>sifaglobalinstitute12@gmail.com</span></div></div>
 <header><div class="container nav">
-<a class="brand" href="index.html"><img src="assets/sifa-logo.png" alt="SIFA Global Institute logo"><span>SIFA Global Institute<small>Software Institute for Financial Accountants</small></span></a>
+<a class="brand" href="index.html"><img src="assets/sifa-logo.webp" alt="SIFA Global Institute logo"><span>SIFA Global Institute<small>Software Institute for Financial Accountants</small></span></a>
 <button class="menu" aria-label="Open menu">☰</button>
 <nav><ul>
-<li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="founder.html">Founder</a></li><li><a href="courses.html">Courses</a></li><li><a href="learning.html">Learning</a></li><li><a href="certifications.html">Certification</a></li><li><a href="resources.html">Resources</a></li><li><a href="ai-support.html">SIFA AI</a></li><li><a href="contact.html">Contact</a></li><li><a class="nav-cta" href="student-portal.html">Student Portal</a></li>
+<li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="founder.html">Founder</a></li><li><a href="courses.html">Courses</a></li><li><a href="learning.html">Learning</a></li><li><a href="student-learning.html">My Learning</a></li><li><a href="student-payments.html">Fees &amp; Scholarship</a></li><li><a href="certifications.html">Certification</a></li><li><a href="resources.html">Resources</a></li><li><a href="ai-support.html">SIFA AI</a></li><li><a href="contact.html">Contact</a></li><li><a class="nav-cta" href="student-portal.html">Student Portal</a></li>
 </ul></nav></div></header>
 <main>
 <section class="page-hero"><div class="container"><span class="eyebrow">Student Portal</span><h1>Your SIFA student account.</h1><p>Sign in to manage your account, application and learning journey in one secure place.</p></div></section>
@@ -34,6 +57,11 @@
 <div id="studentDashboard" class="portal-dashboard" hidden>
 <div class="student-summary"><div><div class="eyebrow" style="color:#62c78a;margin-bottom:8px">Student Account</div><h2>Welcome, <span id="studentName">Student</span></h2><p id="studentEmail"></p></div><div class="summary-meta"><span class="status-pill" id="applicationStatus">Not started</span><small>Application reference: <span id="applicationRef">—</span></small></div></div>
 
+<div class="sifa-student-actions" aria-label="Student destinations">
+<section class="sifa-student-action"><h3>Application</h3><p>Submit an application, continue an available application, or check your application status and reference number.</p><button type="button" class="btn btn-primary" id="sifaOpenApplication">Open Application</button></section>
+<section class="sifa-student-action"><h3>SIFA Classroom</h3><p>Check your course access and, once authorized, enter your private learning area for live classes and course materials.</p><button type="button" class="btn btn-primary" id="sifaOpenClassroom">Open SIFA Classroom</button><div id="sifaClassroomAccessState" class="sifa-state" style="margin-top:12px" hidden></div></section>
+</div>
+<section id="sifaApplicationPanel" class="sifa-detail-panel" hidden><h3>Application</h3><p id="sifaApplicationSummary">Loading your application status…</p><div class="sifa-action-row"><a id="sifaApplyLink" class="btn btn-primary" href="apply.html">Apply / Continue Application</a><button type="button" class="btn btn-secondary" id="sifaCloseApplication">Back to Student Portal</button></div><div id="sifaApplicationStatusDetail" style="margin-top:18px"></div></section>
 <div class="dashboard-grid">
 <section class="account-card" id="my-account"><h3>My Account</h3><p>Manage your personal details and account security. Your login email is linked to your SIFA account.</p>
 <form id="profileForm" class="portal-form"><div class="account-grid">
@@ -65,6 +93,16 @@
 <div id="applicationEmpty" class="empty-state" style="margin-top:14px">No application has been submitted. Admissions are currently closed.</div><div id="applicationHistory" class="history-list"></div>
 </section>
 
+<section class="classroom-launch" id="my-classroom" aria-labelledby="classroomTitle">
+<style>
+.classroom-launch{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;padding:28px;border-radius:18px;border:1px solid #b9e3ca;background:linear-gradient(120deg,#f0fbf5,#ffffff 72%);box-shadow:0 10px 28px rgba(7,26,51,.05)}
+.classroom-launch .classroom-kicker{display:inline-block;color:#19733f;font-size:12px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px}
+.classroom-launch h3{margin:0 0 8px;color:#071a33;font-size:clamp(22px,3vw,30px)}.classroom-launch p{margin:0;color:#53687a;line-height:1.7;max-width:700px}.classroom-features{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.classroom-features span{background:#fff;border:1px solid #d8eadf;color:#315a42;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:700}.classroom-launch .btn{white-space:nowrap}.classroom-launch .classroom-lock{font-size:12px;color:#647789;margin-top:10px}@media(max-width:680px){.classroom-launch{grid-template-columns:1fr}.classroom-launch .btn{width:100%;box-sizing:border-box;text-align:center}}
+</style>
+<div><span class="classroom-kicker">Your learning space</span><h3 id="classroomTitle">My Classroom</h3><p>Enter your protected learning area to find your live class, course books and PDFs, lesson notes, assignments, and SIFA announcements. Materials appear here when your course access is authorized and SIFA has published them.</p><div class="classroom-features"><span>Google Meet</span><span>Books &amp; PDFs</span><span>Lessons &amp; Notes</span><span>Assignments</span><span>Announcements</span></div><p class="classroom-lock"><span aria-hidden="true">🔒</span> Private to signed-in students with authorized learning access.</p></div>
+<div><a class="btn btn-primary" href="student-learning.html" id="openMyClassroomBtn">Enter My Classroom <span aria-hidden="true">→</span></a></div>
+</section>
+
 <div class="dashboard-actions"><div class="dashboard-action"><h3>Courses</h3><p>See SIFA programs and current admission availability.</p><a class="btn btn-secondary" href="courses.html">Explore Courses</a></div><div class="dashboard-action"><h3>SIFA AI</h3><p>Get guidance on accounting, finance, Excel, software and professional skills.</p><a class="btn btn-secondary" href="ai-support.html">Ask SIFA AI</a></div><div class="dashboard-action"><h3>Need Help?</h3><p>Get help with applications, courses, accounts or learning.</p><a class="btn btn-secondary" href="contact.html">Contact SIFA</a></div></div>
 <div class="dashboard-footer-actions"><button id="logoutBtn" class="btn btn-secondary">Sign Out</button></div></div>
 <div id="actionModal" class="action-modal" hidden role="dialog" aria-modal="true" aria-labelledby="actionModalTitle">
@@ -83,7 +121,7 @@
   </div>
 </div>
 </main>
-<footer class="site-footer"><div class="container"><div class="footer-grid"><div><img class="footer-logo" src="assets/sifa-logo.png" alt="SIFA Global Institute"><h3>SIFA Global Institute</h3><p>Practical education in accounting technology, financial systems and digital professional tools.</p></div><div><h3>Explore</h3><a href="about.html">About SIFA</a><a href="founder.html">Founder</a><a href="courses.html">Courses</a><a href="learning.html">Learning</a></div><div><h3>Credentials</h3><a href="certifications.html">SIFA Certifications</a><a href="verify.html">Verify a Certificate</a><a href="scholarships.html">Scholarships & Fee Waivers</a><a href="privacy.html">Privacy Policy</a></div><div><h3>Contact</h3><p>info.sifaglobal@yahoo.com</p><p>Türkiye:<br>+90 537 274 6944</p><p>Rwanda:<br>+250 782 817 643</p><a href="contact.html">Contact SIFA</a> <div class="sifa-social-links" aria-label="SIFA Global Institute social media" style="display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:12px!important;width:max-content!important;height:40px!important;margin:16px 0 0!important;padding:0!important;line-height:1!important;">
+<footer class="site-footer"><div class="container"><div class="footer-grid"><div><img class="footer-logo" src="assets/sifa-logo.webp" alt="SIFA Global Institute"><h3>SIFA Global Institute</h3><p>Practical education in accounting technology, financial systems and digital professional tools.</p></div><div><h3>Explore</h3><a href="about.html">About SIFA</a><a href="founder.html">Founder</a><a href="courses.html">Courses</a><a href="learning.html">Learning</a></div><div><h3>Credentials</h3><a href="certifications.html">SIFA Certifications</a><a href="verify.html">Verify a Certificate</a><a href="scholarships.html">Scholarships & Fee Waivers</a><a href="privacy.html">Privacy Policy</a></div><div><h3>Contact</h3><p>sifaglobalinstitute12@gmail.com</p><p>Türkiye:<br>+90 537 274 6944</p><p>Rwanda:<br>+250 782 817 643</p><a href="contact.html">Contact SIFA</a> <div class="sifa-social-links" aria-label="SIFA Global Institute social media" style="display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:12px!important;width:max-content!important;height:40px!important;margin:16px 0 0!important;padding:0!important;line-height:1!important;">
                 <a  style="display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important;flex:0 0 38px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;box-sizing:border-box!important;line-height:1!important;color:#E4405F!important;text-decoration:none!important;"href="https://instagram.com/sifaglobalinstitute" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
                 <a  style="display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important;flex:0 0 38px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;box-sizing:border-box!important;line-height:1!important;color:#1877F2!important;text-decoration:none!important;"href="https://facebook.com/SIFAGlobalInstitute" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3.2l.8-4H13V9c0-.7.3-1 1-1z"/></svg></a>
                 <a  style="display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important;flex:0 0 38px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;box-sizing:border-box!important;line-height:1!important;color:#0A66C2!important;text-decoration:none!important;"href="https://linkedin.com/in/sifa-global-institute-24a360288" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="4" height="11" fill="currentColor"/><circle cx="6" cy="5.5" r="2" fill="currentColor"/><path fill="currentColor" d="M11 9h4v1.5c1-1.2 2.2-2 4.2-2 3.3 0 4.8 2.1 4.8 6v5.5h-4v-5c0-1.8-.6-3-2.1-3-1.5 0-2.1 1.1-2.1 3v5h-4V9z"/></svg></a>
@@ -95,6 +133,39 @@
                     <svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.52 3.48A11.8 11.8 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.1.55 4.15 1.6 5.96L.12 24l6.32-1.66a11.87 11.87 0 0 0 5.66 1.44h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.23-6.15-3.47-8.42ZM12.1 21.75a9.86 9.86 0 0 1-5.02-1.37l-.36-.21-3.75.98 1-3.65-.24-.38a9.84 9.84 0 0 1-1.51-5.24c0-5.45 4.44-9.89 9.9-9.89a9.82 9.82 0 0 1 7 2.9 9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.9 9.89Zm5.43-7.41c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.67-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.68-1.64-.93-2.24-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.8.37-.28.3-1.05 1.02-1.05 2.49s1.08 2.89 1.23 3.09c.15.2 2.12 3.24 5.13 4.54.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
                 </a>
             </div></div></div><div class="footer-bottom"><div class="container"><p>© <span data-year></span> SIFA Global Institute. All rights reserved.</p><p><a href="privacy.html">Privacy Policy</a></p></div></div></div></footer>
+
+<script>
+(function(){
+ const $=id=>document.getElementById(id);
+ const appPanel=$('sifaApplicationPanel'), classroomState=$('sifaClassroomAccessState');
+ function revealApp(){
+   if(appPanel) appPanel.hidden=false;
+   const legacy=$('my-application');
+   if(legacy){
+     legacy.style.display='block';
+     $('sifaApplicationSummary').textContent='Your application status and reference are shown below when available.';
+     $('sifaApplicationStatusDetail').appendChild(legacy);
+   }
+   appPanel?.scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ $('sifaOpenApplication')?.addEventListener('click',revealApp);
+ $('sifaCloseApplication')?.addEventListener('click',()=>{
+   if(appPanel) appPanel.hidden=true;
+   const legacy=$('my-application');
+   if(legacy){legacy.style.display='';$('studentDashboard')?.appendChild(legacy);}
+   window.scrollTo({top:0,behavior:'smooth'});
+ });
+ $('sifaOpenClassroom')?.addEventListener('click',()=>{
+   if(!classroomState)return;
+   classroomState.hidden=false;
+   classroomState.className='sifa-state';
+   classroomState.textContent='Checking your signed-in account and course access…';
+   // Keep the server-side classroom check as the authority. A destination error is not interpreted as unpaid.
+   window.location.href='student-learning.html';
+ });
+})();
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script><script src="script.js"></script><script src="student-portal.js"></script>
 </body></html>

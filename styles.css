@@ -92,6 +92,15 @@ footer a:hover{color:#9af45f}
 .copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:35px;padding-top:18px;font-size:.88rem}
 .center{text-align:center}
 .muted{color:var(--muted)}
+
+/* Keep the full navigation inside the viewport on medium and small screens. */
+@media(max-width:1200px){
+ .nav{gap:12px}
+ nav ul{display:none;position:absolute;left:0;right:0;top:78px;background:#fff;padding:18px 5%;flex-direction:column;align-items:flex-start;gap:12px;border-bottom:1px solid var(--border);box-shadow:0 12px 22px rgba(6,42,82,.08)}
+ nav ul.open{display:flex}
+ .menu{display:block}
+}
+
 @media(max-width:900px){
  nav ul{display:none;position:absolute;left:0;right:0;top:78px;background:#fff;padding:18px 5%;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--border)}
  nav ul.open{display:flex}.menu{display:block}

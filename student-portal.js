@@ -8,6 +8,26 @@
   let currentUser = null;
   let bootComplete = false;
   let pendingConfirm = null;
+  let recoveryLinkError = null;
+
+  // Supabase may return recovery errors in the URL fragment. Read only the
+  // non-secret error fields, then remove the fragment so stale auth data is
+  // not left in the address bar or browser history.
+  try {
+    const authHash = new URLSearchParams(location.hash.startsWith('#') ? location.hash.slice(1) : location.hash);
+    const authErrorCode = authHash.get('error_code');
+    const authError = authHash.get('error');
+    if (authErrorCode || authError) {
+      if (authErrorCode === 'otp_expired') {
+        recoveryLinkError = 'This password-reset link has expired or has already been used. Return to sign in and request a new link.';
+      } else {
+        recoveryLinkError = 'This password-reset link could not be verified or is no longer valid. Return to sign in and request a new link.';
+      }
+      history.replaceState({}, document.title, location.pathname + location.search);
+    }
+  } catch (_) {
+    // Keep the portal usable if URL parsing is unavailable.
+  }
 
   function showMessage(text, type='info') {
     if (!message) return;
@@ -66,7 +86,7 @@
     }
 
     const withdrawBtn = $('withdrawApplicationBtn');
-    if (withdrawBtn) withdrawBtn.hidden = !(app && activeApplicationStatus(status));
+    if (withdrawBtn) withdrawBtn.hidden = !(app && app.source !== 'public' && activeApplicationStatus(status));
 
     const history = $('applicationHistory');
     history.innerHTML = '';
@@ -113,12 +133,16 @@
   async function loadUser(user, noticeText) {
     if (!user) return showLogin();
     currentUser=user;
-    const [{data:profile},{data:applications,error:appError}]=await Promise.all([
+    const [{data:profile},{data:applications,error:appError},{data:publicApplications,error:publicAppError}]=await Promise.all([
       supabase.from('profiles').select('*').eq('id',user.id).maybeSingle(),
-      supabase.from('applications').select('id,application_ref,status,submitted_at,updated_at,payload,created_at,full_name,email').eq('user_id',user.id).order('created_at',{ascending:false})
+      supabase.from('applications').select('id,application_ref,status,submitted_at,updated_at,payload,created_at,full_name,email').eq('user_id',user.id).order('created_at',{ascending:false}),
+      supabase.from('sifa_public_applications').select('id,application_ref,status,submitted_at,updated_at,payload,full_name,email,program').eq('linked_user_id',user.id).order('submitted_at',{ascending:false})
     ]);
     if(appError) console.error('Application load error:',appError);
-    showDashboard(user,profile||{},applications||[]);
+    if(publicAppError) console.warn('Public application load skipped (backend migration may not yet be deployed):',publicAppError.message);
+    const mappedPublic=(publicApplications||[]).map(a=>({...a,source:'public',created_at:a.submitted_at,payload:{...(a.payload||{}),course:a.program}}));
+    const merged=[...(applications||[]),...mappedPublic].sort((a,b)=>new Date(b.created_at||b.submitted_at||0)-new Date(a.created_at||a.submitted_at||0));
+    showDashboard(user,profile||{},merged);
     if(noticeText) showMessage(noticeText,'success');
     const params = new URLSearchParams(location.search);
     if(params.get('submitted')==='1') {
@@ -317,6 +341,8 @@
   });
   supabase.auth.getSession().then(({data})=>{
     bootComplete=true;
-    if(data.session?.user)loadUser(data.session.user);else showLogin();
+    if(data.session?.user)loadUser(data.session.user);
+    else if(recoveryLinkError)showLogin(recoveryLinkError,'error');
+    else showLogin();
   });
 })();

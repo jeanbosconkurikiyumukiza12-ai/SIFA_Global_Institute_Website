@@ -1,0 +1,46 @@
+SIFA GLOBAL INSTITUTE — FULL LOCAL TEST PROJECT
+================================================
+
+WHAT THIS IS
+This is the full supplied SIFA website source snapshot, packaged for local testing.
+It includes the existing HTML pages, CSS, JavaScript, images, SQL/setup files, and a proposed password-recovery update to student-portal.js.
+
+IMPORTANT: This is NOT a claim that every feature previously discussed has been implemented.
+Only the password-recovery proposal was substituted into the supplied source snapshot. The rest of the site remains as supplied so you can test the full current project without replacing your original files.
+
+SAFETY
+- Extract this ZIP into a NEW folder; never overwrite your original project.
+- Do not upload this test copy to GitHub or deploy it to Vercel.
+- Do not run SQL files in this package.
+- Do not share passwords, Supabase keys, recovery links, or tokens.
+- The front-end configuration can still connect to the configured Supabase project. Use a dedicated test account only. Do not send test emails to real students or test destructive account deletion on a real account.
+- A local Live Server URL may not be permitted by Supabase's redirect allow-list. Do not change Supabase settings without review and approval.
+
+OPEN LOCALLY
+1. Extract the ZIP into a new folder.
+2. Open the extracted `SIFA_Global_Institute_Website-main` folder in VS Code.
+3. Run `index.html` with Live Server as you normally do.
+4. Browse all pages listed in `FULL-TEST-CHECKLIST.txt`.
+5. Test password recovery first with a simulated expired-link URL fragment, then with a dedicated test account only if safe and authorized.
+
+FILES INCLUDED
+The original supplied project files are included, including:
+- Home, About, Founder, Courses, Learning, Certifications, Resources, SIFA AI, Contact, Apply, Privacy, Scholarships, Verify, Student Portal
+- Existing scripts, CSS, images, Supabase configuration, SQL setup files and backups
+- `student-portal.js` contains the proposed recovery error handling
+- This file and `FULL-TEST-CHECKLIST.txt` were added for safe local testing
+
+NOT YET IMPLEMENTED OR NOT VERIFIED BY THIS PACKAGE
+The following items require further design, current live configuration evidence, or additional implementation; do not assume they are included just because the related page exists:
+- End-to-end successful Supabase password reset and email confirmation in a real browser
+- Current live Supabase redirect settings, email templates, RLS/storage policies, installed SQL functions and admissions setting
+- Public application flow without login (current source requires authentication)
+- Secure admin/coordinator review roles and payment approval workflow
+- Receipt uploads/review, monthly payment ledger, scholarship fee reductions, renewal/access control and protected live-class link
+- A live public certificate registry and verification
+- Final confirmation that public scholarship/fee/certificate claims match authorized policy
+- Intermittent `ERR_CONNECTION_CLOSED` diagnosis
+- Full responsive, accessibility, security and end-to-end regression testing
+
+RELEASE RULE
+Do not deploy or run setup SQL based only on this test package. Review the proposed diff, complete tests, and get explicit owner approval before any production change.

@@ -12,5 +12,5 @@ window.SIFA_SETTINGS = {
   // Reopen a program only when SIFA is ready to accept applications.
   applicationsOpen: false,
   openPrograms: [],
-  supportEmail: 'info.sifaglobal@yahoo.com'
+  supportEmail: 'sifaglobalinstitute12@gmail.com'
 };

@@ -1,0 +1,5 @@
+SIFA STUDENT CLASSROOM — VISIBLE PORTAL UPDATE
+
+This update adds a prominent “My Classroom” section inside the signed-in Student Portal dashboard. It links to student-learning.html and lists Google Meet, Books & PDFs, Lessons & Notes, Assignments, and Announcements. The destination retains its own login and learning-access checks.
+
+Important: the visual entry point is not proof that the new classroom backend has been deployed. The private storage bucket, SQL schema, Edge Function, staff role records, and live-class URL still require reviewed configuration and end-to-end tests before materials can be published to real students.

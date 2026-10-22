@@ -1,0 +1,76 @@
+SIFA GLOBAL INSTITUTE — STAGING END-TO-END TEST CHECKLIST
+
+A. Setup and secrets
+[ ] Back up current Supabase schema, policies, storage settings, and auth configuration.
+[ ] Create a separate staging Supabase project.
+[ ] Review SIFA-BACKEND-FOUNDATION-DRAFT.sql against actual staging schema.
+[ ] Apply migration only in staging after review.
+[ ] Configure exact SIFA_ALLOWED_ORIGINS, service-role key as server secret, SIFA_APPLICATIONS_OPEN=false, empty SIFA_OPEN_PROGRAMS, and a staging-only live-class URL.
+[ ] Deploy all five Edge Functions using supabase/config.toml.
+[ ] Create and verify an initial admin user, then assign staff role in staging.
+
+B. Public applications
+[ ] Anonymous visitor can view the application page without being redirected to login.
+[ ] Submission is rejected while admissions are closed.
+[ ] Submission is rejected for invalid email, missing required fields, unapproved program, missing consent, or invalid accuracy confirmation.
+[ ] Anonymous client cannot directly SELECT/INSERT/update private application tables.
+[ ] Valid application returns a server-generated SIFA reference number.
+[ ] Invalid, spoofed, oversized, or unsupported files are rejected.
+[ ] Uploaded documents are private and inaccessible without an authorized short-lived signed URL.
+[ ] Scholarship request creates a pending scholarship decision; ordinary application does not.
+[ ] Student account creation is optional for application submission.
+
+C. Staff access and application decisions
+[ ] Anonymous user and ordinary student are denied all staff console actions.
+[ ] Coordinator can review/decide applications but cannot approve payments or assign admin roles.
+[ ] Finance reviewer can review receipts/invoices but cannot decide applications or assign roles.
+[ ] Administrator can perform authorized workflows and role assignment.
+[ ] Application statuses only change through authorized staff API actions.
+[ ] Signed document links expire after 60 seconds.
+[ ] Student with same verified email can be linked; unmatched email is rejected.
+[ ] Linked public application appears in that student's portal only.
+[ ] Every decision/document access creates an audit entry.
+
+D. Scholarships and billing
+[ ] Scholarship reviewer can approve/reject with reason, percentage, start and end dates.
+[ ] Discount applies to monthly course invoices only, never the certificate fee.
+[ ] 100% approved monthly discount creates a waived monthly invoice and grants eligible access.
+[ ] Monthly invoice due date is the first day of its month; monthly invoices are manually created.
+[ ] Student sees only invoices for their own enrollment.
+[ ] Student cannot submit a receipt for another student's invoice.
+[ ] Receipt file type, size, amount and currency are validated server-side.
+[ ] Receipt upload alone does not activate access.
+[ ] Finance reviewer can open the private receipt, approve/reject once, and add a note.
+[ ] Approval marks invoice paid and activates/reactivates eligible pending/suspended enrollment.
+[ ] Rejection returns invoice to unpaid and leaves access ungranted.
+[ ] No duplicate receipt submission is accepted while a receipt is under review.
+[ ] No bank/mobile-money account is treated as verified unless owner independently confirms it.
+
+E. Protected learning access
+[ ] Logged-out student cannot retrieve the private meeting URL.
+[ ] No enrollment / withdrawn / completed enrollment cannot obtain active access.
+[ ] Paid current monthly invoice grants access for active enrollment dates.
+[ ] Unpaid invoice grants grace-period access only through due date + 14 days.
+[ ] Expired grace period denies access.
+[ ] Receipt submitted but not approved does not grant access.
+[ ] Valid approved scholarship waiver or admin exception grants only the authorized access period.
+[ ] Expired exception denies access; exceptions cannot be created by coordinators/students.
+[ ] The meeting URL is absent from public HTML and client configuration.
+
+F. Certificate workflow
+[ ] Only completed enrollment can receive certificate-fee invoice.
+[ ] Certificate fee invoice is 5,000 RWF and receives no scholarship discount.
+[ ] Receipt must be approved and certificate-fee invoice paid before issuance.
+[ ] Duplicate certificate-fee invoices are prevented for the same enrollment while one exists.
+[ ] Only authorized staff can issue/revoke a certificate.
+[ ] Public verification returns only code, display name, program, issue date, and active/revoked status.
+[ ] Unknown code returns no personal information; revoked certificate is not shown as valid.
+
+G. Auth, deployment and regression
+[ ] Test a fresh password reset email and recovery link, including expired/used links.
+[ ] Confirm Supabase Site URL and allow-list match the actual Vercel deployment domain.
+[ ] Confirm email verification and password-reset emails are delivered.
+[ ] Check browser console and network logs for errors on desktop and mobile.
+[ ] Verify navigation, forms, social links, menu, account edit/delete, and existing portal behavior.
+[ ] Keep admissions closed until every critical test passes.
+[ ] Deploy only the reviewed build; then repeat smoke tests on production.

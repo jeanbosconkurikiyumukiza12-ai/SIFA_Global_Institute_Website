@@ -1,0 +1,28 @@
+SIFA GLOBAL INSTITUTE — REVIEW STATUS
+Build prepared: 22 October 2026
+
+Implemented in local source:
+- Public application Edge Function with server-side validation, server-generated reference, private document upload, and scholarship request creation.
+- Staff-only Edge Function and console for application review, private document signed links, verified account linking, enrollment creation, scholarship decisions, monthly invoice creation, payment receipt review, access exceptions, and certificate issuance/revocation.
+- Student invoice list and private receipt submission workflow.
+- Protected learning-access check that uses enrollment status, monthly invoice status, a 14-day grace period, and a time-limited authorized exception.
+- Public certificate verification RPC and UI.
+- Student Portal display of linked public applications.
+- SQL draft includes restrictive RLS, staff roles, audit log, private bucket, invoice type separation, and narrow public certificate verification.
+- Admissions remain closed by default.
+
+Local checks completed:
+- All root JavaScript files pass Node.js syntax checks.
+- ZIP archive integrity checked after packaging.
+- SQL transaction structure checked manually; a PostgreSQL/Supabase engine is not available in this local environment.
+
+Not verified / not completed live:
+- Supabase Edge Function compilation/deployment.
+- Migration execution against a real schema.
+- RLS, Auth, Storage, signed URL, email/password recovery, and access-boundary integration tests.
+- Browser end-to-end tests with a staging Supabase project.
+- GitHub/Vercel deployment and production smoke tests.
+- Payment transfers are reviewed manually; no bank/mobile-money API reconciliation exists.
+- Decision emails are not sent automatically.
+
+No live Supabase, GitHub, or Vercel changes were made by generating this package. This archive is a full implementation candidate requiring staging validation, not a claim that the production business system is already operational.

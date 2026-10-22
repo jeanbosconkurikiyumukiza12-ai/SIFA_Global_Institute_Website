@@ -1,21 +1,20 @@
 SIFA GLOBAL INSTITUTE — START HERE
 
 1. Extract the ZIP completely. Do not open index.html from inside the ZIP.
-2. Open this folder in VS Code.
-3. In VS Code, install the extension called "Live Server" (by Ritwick Dey).
-4. Open index.html.
-5. Right-click inside index.html -> "Open with Live Server".
-6. Chrome should open an address similar to http://127.0.0.1:5500/ .
-7. Now click Home, About, Founder, Courses, Learning, Certification, Resources, Contact and Apply Now.
+2. Open the extracted folder in VS Code.
+3. Start Live Server from index.html to preview the public website.
+4. Open SIFA-FINAL-IMPLEMENTATION-GUIDE.md before attempting any backend setup.
+5. Review FINAL-REVIEW-STATUS.txt and FULL-TEST-CHECKLIST.txt.
 
-If a link does not work:
-- Make sure you opened the extracted folder in VS Code.
-- Make sure all HTML files are in the same main folder.
-- Make sure the assets folder is still inside the main folder.
-- Use Live Server rather than double-clicking index.html.
+Pages added/connected in this implementation build:
+- apply.html: public application form (closed by default); submission goes to a server-side Edge Function once configured.
+- sifa-admin.html: restricted staff console for applications, private documents, scholarships, enrollments, monthly invoices, receipts, and certificates.
+- student-payments.html: authenticated student invoice and payment receipt page.
+- student-learning.html: protected live-class access page.
+- verify.html: public certificate registry lookup.
 
 IMPORTANT:
-- Do not rename the HTML files unless you update the links.
-- Do not move the assets folder.
-- The first application form opens the visitor's email client. A real online application database is a later development stage.
-- Certificate verification is currently a planned system, not a live database.
+- Local preview does not connect the backend workflows unless the Edge Functions and migration have been deployed to a staging project.
+- Do not run old SQL setup files or the new draft migration against production without backup, schema review, and staging tests.
+- Admissions are intentionally closed. Never open applications until backend and security tests pass.
+- Never expose a service-role key or private meeting URL in public browser code.

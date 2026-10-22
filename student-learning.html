@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SIFA Global Institute student classroom for live classes, learning materials, lessons, assignments and announcements.">
+<title>SIFA Classroom | SIFA Global Institute</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+:root{--sifa-navy:#0b2340;--sifa-blue:#123e70;--sifa-green:#15965b;--sifa-ink:#17283e;--sifa-muted:#63748a;--sifa-border:#e0e8f0}
+.classroom-page{background:#f5f8fc;color:var(--sifa-ink);min-height:70vh}
+.classroom-hero{background:radial-gradient(circle at 85% 10%,rgba(32,170,120,.22),transparent 30%),linear-gradient(125deg,#071a32,#103e70 70%,#0c5b68);color:#fff;padding:58px 0 54px}
+.classroom-hero-inner{max-width:1120px;margin:auto;padding:0 22px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,.6fr);gap:34px;align-items:center}
+.classroom-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.14em;font-weight:850;text-transform:uppercase;color:#82e2b2}
+.classroom-eyebrow:before{content:"";width:24px;height:2px;background:#82e2b2}
+.classroom-hero h1{font-size:clamp(36px,5vw,58px);line-height:1.06;letter-spacing:-.04em;color:#fff;margin:15px 0}
+.classroom-hero p{font-size:17px;line-height:1.75;color:#e1eaf5;max-width:650px;margin:0}
+.hero-note{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);padding:22px;border-radius:18px;backdrop-filter:blur(6px)}
+.hero-note strong{display:block;font-size:16px;margin-bottom:8px;color:#fff}
+.hero-note p{font-size:14px;line-height:1.65}
+.classroom-main{max-width:1120px;margin:auto;padding:34px 22px 64px}
+.classroom-section-heading{display:flex;justify-content:space-between;gap:18px;align-items:end;margin:4px 0 20px}
+.classroom-section-heading h2{font-size:26px;letter-spacing:-.025em;margin:0 0 6px;color:var(--sifa-navy)}
+.classroom-section-heading p{margin:0;color:var(--sifa-muted);line-height:1.6}
+.learning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.learning-tile{background:#fff;border:1px solid var(--sifa-border);border-radius:16px;padding:22px;box-shadow:0 5px 18px rgba(14,38,67,.035);min-height:176px;display:flex;flex-direction:column}
+.tile-icon{height:42px;width:42px;border-radius:12px;background:#e9f7f0;color:#117847;display:grid;place-items:center;font-size:21px;font-weight:800;margin-bottom:16px}
+.learning-tile h3{margin:0 0 8px;font-size:17px;color:var(--sifa-navy)}
+.learning-tile p{margin:0;color:var(--sifa-muted);font-size:14px;line-height:1.65}
+.classroom-status{margin:26px 0 0;padding:16px 18px;border-radius:13px;border:1px solid #d9e5ef;background:#fff;color:#354a60;line-height:1.65}
+.classroom-status.error{background:#fff8f5;border-color:#f0d2c6;color:#87402e}
+.classroom-status.success{background:#effaf4;border-color:#bfe5cd;color:#17643b}
+.classroom-status a{color:#0d7042;font-weight:800}
+#learningDetails{margin-top:22px}
+.classroom-welcome{padding:26px;border-radius:18px;background:linear-gradient(120deg,#123c72,#087e83);color:white;margin-bottom:18px}
+.classroom-welcome h2{margin:8px 0;color:white}
+.classroom-kicker{font-size:12px;font-weight:800;letter-spacing:.12em}
+.classroom-panel{background:#fff;border:1px solid var(--sifa-border);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 5px 18px rgba(14,38,67,.025)}
+.classroom-panel h3{margin-top:0;color:var(--sifa-navy)}
+.material-item{border-top:1px solid #e7edf3;padding:16px 0}
+.material-item h4{margin:0 0 6px}
+.material-item p{margin:6px 0}
+.empty-state{color:#65758b;font-size:14px;background:#f7f9fc;padding:12px;border-radius:9px}
+.private-link{display:inline-flex;margin-top:8px;padding:11px 16px;border-radius:10px;background:#0c693b;color:#fff!important;text-decoration:none;font-weight:800}
+.small{font-size:13px;color:#62748a}
+.classroom-footer-note{margin-top:24px;padding:20px;border:1px solid var(--sifa-border);background:#fff;border-radius:14px;color:var(--sifa-muted);font-size:13px;line-height:1.7}
+@media(max-width:760px){.classroom-hero{padding:42px 0}.classroom-hero-inner{grid-template-columns:1fr;gap:22px}.hero-note{max-width:none}.learning-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.classroom-section-heading{display:block}.classroom-section-heading p{margin-top:8px}}
+@media(max-width:480px){.learning-grid{grid-template-columns:1fr}.learning-tile{min-height:0}.classroom-main{padding:26px 16px 42px}.classroom-hero-inner{padding:0 16px}}
+</style>
+</head>
+<body>
+<header><div class="container nav"><a class="brand" href="index.html"><img src="assets/sifa-logo.webp" alt="SIFA logo"><span>SIFA Global Institute<small>Student learning space</small></span></a><a href="student-portal.html">Student Portal</a></div></header>
+<main class="classroom-page">
+<section class="classroom-hero">
+ <div class="classroom-hero-inner">
+  <div>
+   <span class="classroom-eyebrow">SIFA Learning Experience</span>
+   <h1>Your classroom.<br>Your next step.</h1>
+   <p>A dedicated learning space for SIFA students to attend live classes, access course resources, review lessons, submit assignments and stay up to date.</p>
+  </div>
+  <aside class="hero-note">
+   <strong>Learning, made practical</strong>
+   <p>Our approach is simple: Learn → Practice → Apply. Course materials and private class links are shown to students whose classroom access has been confirmed.</p>
+  </aside>
+ </div>
+</section>
+<section class="classroom-main">
+ <div class="classroom-section-heading">
+  <div><h2>Explore your classroom</h2><p>Everything you need for your learning journey, organized in one place.</p></div>
+ </div>
+ <div class="learning-grid" aria-label="Classroom sections">
+  <article class="learning-tile"><div class="tile-icon" aria-hidden="true">▶</div><h3>Live Google Meet classes</h3><p>Join scheduled online lessons through the private class link provided for your enrolled course.</p></article>
+  <article class="learning-tile"><div class="tile-icon" aria-hidden="true">PDF</div><h3>Books & PDF materials</h3><p>Access course books, worksheets and other learning documents shared by SIFA instructors.</p></article>
+  <article class="learning-tile"><div class="tile-icon" aria-hidden="true">✎</div><h3>Lessons & notes</h3><p>Review lesson summaries, key concepts and notes to support your independent study.</p></article>
+  <article class="learning-tile"><div class="tile-icon" aria-hidden="true">✓</div><h3>Assignments</h3><p>Find practice tasks and assignment instructions designed to help you apply what you learn.</p></article>
+  <article class="learning-tile"><div class="tile-icon" aria-hidden="true">i</div><h3>Announcements</h3><p>Keep up with class updates, schedule changes, new resources and important student notices.</p></article>
+  <article class="learning-tile"><div class="tile-icon" aria-hidden="true">↗</div><h3>Learn → Practice → Apply</h3><p>Build practical skills step by step and connect each lesson with real-world tasks.</p></article>
+ </div>
+ <div id="learningStatus" class="classroom-status" role="status" aria-live="polite">Checking your classroom access…</div>
+ <div id="learningDetails" hidden></div>
+ <div class="classroom-footer-note"><strong>Student access and privacy</strong><br>Private course materials and meeting links are available only after your student access is confirmed. If you believe you should have access but cannot open your classroom, return to the Student Portal or contact SIFA support.</div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="student-learning.js"></script>
+</body>
+</html>
