@@ -1,0 +1,19 @@
+project_id = "pdzspvwhkxdmuynvpjsy"
+
+[functions.public-application]
+verify_jwt = false
+
+[functions.sifa-admin-api]
+verify_jwt = true
+
+[functions.submit-payment-receipt]
+verify_jwt = true
+
+[functions.sifa-student-billing]
+verify_jwt = true
+
+[functions.sifa-learning-access]
+verify_jwt = true
+
+[functions.sifa-classroom-api]
+verify_jwt = true
