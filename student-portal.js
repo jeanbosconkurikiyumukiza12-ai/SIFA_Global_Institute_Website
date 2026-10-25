@@ -199,18 +199,67 @@
     if(error)return showMessage(error.message,'error');
     await loadUser(data.user);
   });
-  $('signupForm')?.addEventListener('submit',async e=>{
-    e.preventDefault();hideMessage();
-    const name=$('signupName').value.trim(), email=$('signupEmail').value.trim(), password=$('signupPassword').value, confirm=$('signupConfirm').value;
-    if(name.length<2)return showMessage('Please enter your full name.','error');
-    if(password.length<8)return showMessage('Your password must contain at least 8 characters.','error');
-    if(password!==confirm)return showMessage('The two passwords do not match.','error');
-    const{data,error}=await supabase.auth.signUp({email,password,options:{data:{full_name:name}}});
-    if(error)return showMessage(error.message,'error');
-    if(data.user)await supabase.from('profiles').upsert({id:data.user.id,full_name:name,email});
-    if(!data.session)showLogin('Your account has been created. Please check your email to verify your account, then sign in.','success');
-    else await loadUser(data.user);
+  $('signupForm')?.addEventListener('submit', async e => {
+  e.preventDefault();
+  hideMessage();
+
+  const name = $('signupName').value.trim();
+  const email = $('signupEmail').value.trim();
+  const password = $('signupPassword').value;
+  const confirm = $('signupConfirm').value;
+
+  if (name.length < 2) {
+    return showMessage('Please enter your full name.', 'error');
+  }
+
+  if (password.length < 8) {
+    return showMessage('Your password must contain at least 8 characters.', 'error');
+  }
+
+  if (password !== confirm) {
+    return showMessage('The two passwords do not match.', 'error');
+  }
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { full_name: name },
+      emailRedirectTo: `${window.location.origin}/student-portal.html`
+    }
   });
+
+  if (error) {
+    return showMessage(error.message, 'error');
+  }
+
+  if (data.user) {
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .upsert({
+        id: data.user.id,
+        full_name: name,
+        email: email
+      });
+
+    if (profileError) {
+      console.error('Profile creation error:', profileError);
+    }
+  }
+
+  if (!data.session) {
+    showLogin(
+      'Your account request was received! Please check your email and click the confirmation link to activate your SIFA Global Institute account.',
+      'success'
+    );
+  } else {
+    await loadUser(data.user);
+    showMessage(
+      'Welcome to SIFA Global Institute! Your account has been created successfully.',
+      'success'
+    );
+  }
+});
   $('profileForm')?.addEventListener('submit',async e=>{
     e.preventDefault();if(!currentUser)return;
     const btn=$('saveProfileBtn');btn.disabled=true;btn.textContent='Saving…';
@@ -328,21 +377,62 @@
   $('actionModalCancel2')?.addEventListener('click',closeModal);
   $('actionModal')?.addEventListener('click',e=>{if(e.target.id==='actionModal')closeModal();});
   $('actionModalConfirm')?.addEventListener('click',()=>{if(pendingConfirm)pendingConfirm();});
-  $('logoutBtn')?.addEventListener('click',async()=>{await supabase.auth.signOut();currentUser=null;showLogin('You have been signed out.','success');});
+  $('logoutBtn')?.addEventListener('click', async () => {
+  const { error } = await supabase.auth.signOut();
 
-  supabase.auth.onAuthStateChange((_event,session)=>{
-    if(_event==='PASSWORD_RECOVERY' && session?.user){
-      currentUser=session.user;
-      loadUser(session.user).then(()=>openPasswordPanel(true));
-      return;
+  if (error) {
+    showMessage('Could not log out. Please try again.', 'error');
+    return;
+  }
+
+  currentUser = null;
+  showLogin('You have been signed out.', 'success');
+});
+
+  supabase.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'PASSWORD_RECOVERY' && session?.user) {
+    currentUser = session.user;
+    await loadUser(session.user);
+    openPasswordPanel(true);
+    return;
+  }
+
+  if (!bootComplete) return;
+
+  if (session?.user) {
+    const justConfirmed =
+      event === 'SIGNED_IN' &&
+      new URLSearchParams(window.location.search).get('confirmed') === 'true';
+
+    await loadUser(session.user);
+
+    if (justConfirmed) {
+      showMessage(
+        'Your email has been confirmed. Welcome to SIFA Global Institute! Your account is ready.',
+        'success'
+      );
+      history.replaceState({}, document.title, window.location.pathname);
     }
-    if(!bootComplete)return;
-    if(session?.user)loadUser(session.user);else showLogin();
-  });
-  supabase.auth.getSession().then(({data})=>{
-    bootComplete=true;
-    if(data.session?.user)loadUser(data.session.user);
-    else if(recoveryLinkError)showLogin(recoveryLinkError,'error');
-    else showLogin();
-  });
+  } else {
+    showLogin();
+  }
+});
+
+supabase.auth.getSession().then(({ data, error }) => {
+  bootComplete = true;
+
+  if (error) {
+    console.error('Session check failed:', error);
+    showLogin('Please sign in to continue.', 'info');
+    return;
+  }
+
+  if (data.session?.user) {
+    loadUser(data.session.user);
+  } else if (recoveryLinkError) {
+    showLogin(recoveryLinkError, 'error');
+  } else {
+    showLogin();
+  }
+});
 })();
