@@ -1,64 +1,363 @@
 <!doctype html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Fees, Payments & Scholarships | SIFA Global Institute</title>
+
 <meta name="description" content="Public information about SIFA Global Institute course fees, payment methods, payment receipts, scholarships, discounts, grace periods and certificate fees.">
+
 <link rel="stylesheet" href="styles.css">
+
 <style>
+
 :root{--fee-navy:#0b2545;--fee-blue:#1459a6;--fee-green:#18845b;--fee-line:#dce6ef;--fee-muted:#5e7185}
+
 .fee-page{color:#15283c}.fee-page .container{max-width:1120px}.fee-hero{background:linear-gradient(135deg,#102f56 0%,#16456f 58%,#0b776b 100%);color:white;padding:58px 0}.fee-hero h1{font-size:clamp(2rem,4vw,3.25rem);max-width:850px;line-height:1.1;margin:12px 0}.fee-hero p{max-width:790px;color:#e7f1fa;font-size:1.05rem;line-height:1.7}.fee-eyebrow{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#bcebd6}.fee-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.fee-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:12px 18px;text-decoration:none;font-weight:800;border:1px solid transparent}.fee-btn-primary{background:#e9f9ee;color:#0d542f;border-color:#a7dfb8}.fee-btn-outline{color:#fff;border-color:#a7dfb8;background:rgba(13,84,47,.28)}.fee-section{padding:34px 0}.fee-section h2{font-size:clamp(1.5rem,3vw,2rem);margin:0 0 10px;color:var(--fee-navy)}.fee-lead{color:var(--fee-muted);line-height:1.7;max-width:850px}.fee-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}.fee-card{background:#fff;border:1px solid var(--fee-line);border-radius:16px;padding:22px;box-shadow:0 7px 22px rgba(15,39,64,.045)}.fee-card h3{margin:0 0 10px;color:var(--fee-navy);font-size:1.1rem}.fee-card p,.fee-card li{line-height:1.65;color:#40566c}.fee-price{font-size:clamp(1.65rem,3vw,2.2rem);font-weight:900;color:var(--fee-blue);margin:8px 0}.fee-tag{display:inline-block;padding:5px 9px;border-radius:99px;background:#eaf7f0;color:#176644;font-size:.78rem;font-weight:800}.fee-notice{border:1px solid #b9ddc9;background:#f0faf4;border-radius:14px;padding:18px 20px;line-height:1.65;margin:18px 0}.fee-warning{border:1px solid #ead9a5;background:#fff9e8;border-radius:14px;padding:18px 20px;line-height:1.65;margin:18px 0}.fee-steps{counter-reset:steps;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}.fee-step{border:1px solid var(--fee-line);border-radius:14px;padding:18px;background:#f9fbfd}.fee-step:before{counter-increment:steps;content:counter(steps);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--fee-navy);color:white;font-weight:900;margin-bottom:12px}.fee-step h3{font-size:1rem;color:var(--fee-navy);margin:0 0 7px}.fee-step p{font-size:.94rem;line-height:1.6;color:#53677b;margin:0}.fee-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}.fee-link{display:block;border:1px solid var(--fee-line);border-radius:12px;padding:16px;text-decoration:none;color:var(--fee-navy);font-weight:800;background:white}.fee-link span{display:block;font-weight:400;font-size:.9rem;line-height:1.5;color:var(--fee-muted);margin-top:5px}.fee-faq details{border-bottom:1px solid var(--fee-line);padding:15px 0}.fee-faq summary{font-weight:800;color:var(--fee-navy);cursor:pointer}.fee-faq p{line-height:1.7;color:#53677b}.fee-form-wrap{margin-top:20px}.fee-form-wrap[hidden],#invoiceCard[hidden],#receiptCard[hidden]{display:none!important}.pay-shell{max-width:900px;margin:auto}.pay-card{background:#fff;border:1px solid var(--fee-line);border-radius:16px;padding:24px;margin:18px 0}.pay-form{display:grid;gap:14px;max-width:640px}.pay-form label{font-weight:700}.pay-form input,.pay-form select,.pay-form textarea{width:100%;box-sizing:border-box;margin-top:7px;padding:12px;border:1px solid #d7e1ea;border-radius:9px;font:inherit}.pay-list{display:grid;gap:12px}.invoice{padding:15px;border:1px solid #e2e9ef;border-radius:12px}.pay-message{padding:14px;border:1px solid #d7e1ea;border-radius:10px;background:#f7fafc;margin:14px 0}.pay-message.error{background:#fff5f5;border-color:#efcaca;color:#8a2d2d}.pay-message.success{background:#f1faf5;border-color:#bfe2cc;color:#1d6a3d}.muted{font-size:13px;color:#62748a}.fee-footer{background:#081e36;color:#e6eef6;padding:34px 0;margin-top:30px}.fee-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:24px}.fee-footer a{color:#e6eef6}.fee-footer p{line-height:1.6}.fee-footer h3{color:white}.fee-social{display:flex;flex-wrap:wrap;gap:12px}.fee-social a{font-size:.9rem}
+
 /* Make every payment action visibly interactive */
+
 #payment-methods a:not(.brand),#payment-methods button,.fee-actions a,.fee-copy-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#e8f8ed!important;color:#126239!important;border:1px solid #7ac995!important;border-radius:10px!important;padding:11px 15px!important;font-weight:800!important;text-decoration:none!important;box-shadow:0 2px 0 rgba(18,98,57,.10);cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s}
+
 #payment-methods a:hover,#payment-methods button:hover,.fee-actions a:hover,.fee-copy-btn:hover{background:#d0f0da!important;box-shadow:0 4px 12px rgba(18,98,57,.18);transform:translateY(-1px)}
+
 #payment-methods a:focus-visible,#payment-methods button:focus-visible,.fee-actions a:focus-visible,.fee-copy-btn:focus-visible{outline:3px solid #f0b429;outline-offset:3px}
+
 #payment-methods p a{display:inline-flex;margin:4px 3px 4px 0}
+
 #payment-methods .fee-actions{align-items:flex-start}
+
 #payMessage[hidden]{display:none!important}
+
 @media(max-width:800px){.fee-grid{grid-template-columns:1fr 1fr}.fee-steps{grid-template-columns:1fr 1fr}.fee-links{grid-template-columns:1fr 1fr}.fee-footer-grid{grid-template-columns:1fr 1fr}.fee-hero{padding:42px 0}}
+
 @media(max-width:520px){.fee-grid,.fee-steps,.fee-links,.fee-footer-grid{grid-template-columns:1fr}.fee-card,.pay-card{padding:18px}.fee-actions .fee-btn{width:100%;box-sizing:border-box}}
+
 /* Fees page: collapse navigation before desktop links run off-screen */
+
 @media (max-width: 1250px) {
-  body > header > .container.nav { position:relative; gap:10px; padding-left:12px; padding-right:12px; }
-  body > header > .container.nav > .brand { gap:8px; min-width:0; }
-  body > header > .container.nav > .brand img { width:58px; }
-  body > header > .container.nav > .brand > span { font-size:15px; }
-  body > header > .container.nav > .brand > span small { font-size:11px; }
-  body > header > .container.nav > .menu { display:inline-flex!important; margin-left:auto; }
-  body > header > .container.nav > nav { position:absolute!important; top:100%!important; left:0!important; right:0!important; width:100%!important; margin:0!important; z-index:10001!important; }
-  body > header > .container.nav > nav ul { display:none!important; position:static!important; width:100%!important; box-sizing:border-box!important; flex-direction:column!important; align-items:stretch!important; gap:8px!important; padding:16px!important; margin:0!important; background:#fff!important; box-shadow:0 8px 18px rgba(0,0,0,.15)!important; }
-  body > header > .container.nav > nav ul.open { display:flex!important; }
-  body > header > .container.nav > nav ul li, body > header > .container.nav > nav ul li a { display:block!important; width:100%!important; box-sizing:border-box!important; }
+
+  body > header > .container.nav { position:relative; gap:10px; padding-left:12px; padding-right:12px; }
+
+  body > header > .container.nav > .brand { gap:8px; min-width:0; }
+
+  body > header > .container.nav > .brand img { width:58px; }
+
+  body > header > .container.nav > .brand > span { font-size:15px; }
+
+  body > header > .container.nav > .brand > span small { font-size:11px; }
+
+  body > header > .container.nav > .menu { display:inline-flex!important; margin-left:auto; }
+
+  body > header > .container.nav > nav { position:absolute!important; top:100%!important; left:0!important; right:0!important; width:100%!important; margin:0!important; z-index:10001!important; }
+
+  body > header > .container.nav > nav ul { display:none!important; position:static!important; width:100%!important; box-sizing:border-box!important; flex-direction:column!important; align-items:stretch!important; gap:8px!important; padding:16px!important; margin:0!important; background:#fff!important; box-shadow:0 8px 18px rgba(0,0,0,.15)!important; }
+
+  body > header > .container.nav > nav ul.open { display:flex!important; }
+
+  body > header > .container.nav > nav ul li, body > header > .container.nav > nav ul li a { display:block!important; width:100%!important; box-sizing:border-box!important; }
+
 }
+
 @media (min-width:1251px) { body > header > .container.nav > .menu { display:none!important; } }
 
+
+
+
+/* Footer layout correction: keep the four columns balanced like the other SIFA pages */
+.fee-footer { padding: 30px 0 26px !important; }
+.fee-footer > .container.fee-footer-grid {
+  width: min(1200px, calc(100% - 48px)) !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.35fr) minmax(130px, .8fr) minmax(190px, 1.15fr) minmax(260px, 1.5fr) !important;
+  align-items: start !important;
+  gap: 32px !important;
+}
+.fee-footer > .container.fee-footer-grid > div { min-width: 0 !important; }
+.fee-footer > .container.fee-footer-grid > div:first-child img {
+  display: block !important;
+  width: 76px !important;
+  height: 76px !important;
+  object-fit: contain !important;
+  margin: 0 0 12px !important;
+}
+.fee-footer h3 { line-height: 1.25 !important; margin: 0 0 12px !important; }
+.fee-footer p { line-height: 1.55 !important; margin: 0 0 9px !important; overflow-wrap: anywhere; }
+.fee-footer .fee-social {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 14px 0 0 !important;
+}
+.fee-footer .fee-social a {
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 24px !important;
+  margin: 0 !important;
+}
+@media (max-width: 900px) {
+  .fee-footer > .container.fee-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 26px !important;
+  }
+}
+@media (max-width: 520px) {
+  .fee-footer > .container.fee-footer-grid {
+    width: calc(100% - 36px) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 22px !important;
+  }
+}
 </style>
+
 <style>
+
 .fee-copy-btn{cursor:pointer;background:#fff;color:#0b2545;border:1px solid #b9c9d8;padding:10px 14px;border-radius:10px;font:inherit;font-weight:700}
+
 .fee-copy-btn:hover{background:#eef5fb}.fee-social{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:8px!important;margin-top:12px!important}.fee-social a{transition:transform .15s ease}.fee-social a:hover{transform:translateY(-2px)}
+
 #payMessage[hidden],#invoiceCard[hidden],#receiptCard[hidden]{display:none!important}
+
 </style>
+
 <link rel="icon" type="image/png" href="assets/sifa-logo.png">
+
+
+<style id="sifa-bottom-layout-fix">
+/* Keep the original compact bottom-page flow and avoid oversized gaps. */
+#student-actions.fee-section { padding-top: 24px; padding-bottom: 18px; }
+#student-actions .fee-links { margin-top: 14px; gap: 10px; }
+#student-actions .fee-link { padding: 13px 15px; }
+.fee-form-wrap { margin-top: 0 !important; margin-bottom: 0 !important; }
+.fee-form-wrap > #payMessage { margin-top: 8px; margin-bottom: 8px; }
+.fee-footer { margin-top: 0 !important; padding: 26px 0 !important; }
+.fee-footer-grid { gap: 18px !important; }
+.fee-footer p { margin: 7px 0; }
+.fee-footer h3 { margin: 0 0 10px; }
+@media (max-width: 520px) {
+  #student-actions.fee-section { padding-top: 20px; padding-bottom: 14px; }
+  .fee-footer { padding: 22px 0 !important; }
+}
+</style>
+
 </head>
+
 <body>
+
 <div class="topbar"><div class="container"><span>Empowering Financial Professionals Through Technology</span><span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sifaglobalinstitute12@gmail.com">sifaglobalinstitute12@gmail.com</a></span></div></div>
+
 <header><div class="container nav"><a class="brand" href="index.html"><img src="assets/sifa-logo.png" alt="SIFA Global Institute logo"><span>SIFA Global Institute<small>Software Institute for Financial Accountants</small></span></a><button class="menu" aria-label="Open menu">☰</button><nav><ul>
-<li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="founder.html">Founder</a></li><li><a href="courses.html">Courses</a></li><li><a href="learning.html">Learning</a></li><li><a href="certifications.html">Certification</a></li><li><a href="resources.html">Resources</a></li><li><a class="active" aria-current="page" href="student-payments.html">Fees & Scholarships</a></li><li><a href="contact.html">Contact</a></li><li><a class="nav-cta" href="student-portal.html">Student Portal</a></li>
+
+<li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="founder.html">Founder</a></li><li><a href="courses.html">Courses</a></li><li><a href="learning.html">Learning</a></li><li><a href="certifications.html">Certification</a></li><li><a href="resources.html">Resources</a></li><li><a href="ai-support.html">SIFA AI</a></li><li><a class="active" aria-current="page" href="student-payments.html">Fees & Scholarships</a></li><li><a href="contact.html">Contact</a></li><li><a class="nav-cta" href="student-portal.html">Student Portal</a></li>
+
 </ul></nav></div></header>
+
 <main class="fee-page">
+
 <section class="fee-hero"><div class="container"><span class="fee-eyebrow">Public information · no login required to read</span><h1>Fees, Payments & Scholarships</h1><p>Everything learners need to understand SIFA course fees, monthly payment deadlines, accepted payment methods, receipt review, scholarship support, certificate fees and the next steps. You can read this page without signing in.</p><div class="fee-actions"><a class="fee-btn fee-btn-primary" href="#fee-rules">View fees and rules</a><a class="fee-btn fee-btn-outline" href="https://mail.google.com/mail/?view=cm&fs=1&to=sifaglobalinstitute12@gmail.com&su=SIFA%20payment%20instructions">Request verified payment instructions</a><a class="fee-btn fee-btn-outline" href="courses.html">Explore courses</a></div></div></section>
-<section class="fee-section" id="fee-rules"><div class="container"><h2>Course fees at a glance</h2><p class="fee-lead">These are the fee rules confirmed for SIFA. Individual invoices and any approved scholarship are confirmed by authorized SIFA staff.</p><div class="fee-grid">
-<article class="fee-card"><span class="fee-tag">Standard monthly fee</span><h3>Monthly course fee</h3><div class="fee-price">10,000 RWF</div><p>Standard monthly fee per enrolled learner. Monthly billing is handled by SIFA staff, not through automatic recurring charges.</p></article>
-<article class="fee-card"><span class="fee-tag">Optional</span><h3>Course-completion certificate</h3><div class="fee-price">5,000 RWF</div><p>Only charged if a learner requests a certificate after meeting SIFA's completion requirements. This fee is separate from monthly tuition and is not covered by monthly-fee scholarships.</p></article>
-</div><div class="fee-notice"><strong>Payment due date:</strong> the first day of each month. <strong>Grace period:</strong> 14 days after the due date, subject to the final verified invoice and access rules. <strong>Renewals:</strong> handled manually by SIFA staff; no automatic renewal charge is taken.</div></div></section>
-<section class="fee-section" style="background:#f5f8fb" id="scholarships"><div class="container"><h2>Scholarships and fee support</h2><p class="fee-lead">SIFA may announce partial reductions to monthly course fees when a specific opportunity is officially opened. Scholarship information is public, and you do not need to log in to read the conditions.</p><div class="fee-grid"><article class="fee-card"><h3>What support covers</h3><p>Approved support reduces monthly course fees only, according to the terms confirmed in the official opportunity announcement.</p></article><article class="fee-card"><h3>Eligibility and decisions</h3><p>Requests are assessed against the criteria, deadlines and availability announced for each opportunity. Submitting a request does not guarantee an award.</p></article><article class="fee-card"><h3>What support does not cover</h3><p>Scholarships do not cover the optional 5,000 RWF certificate fee. That fee is payable separately only if a learner requests a certificate.</p></article></div><div class="fee-warning"><strong>Current scholarship status:</strong> no scholarship opportunity is currently open for applications. SIFA will publish eligibility requirements, reduction amounts, deadlines and application instructions when an opportunity is officially opened. We do not promise a full scholarship or invent an award percentage that has not been announced.</div><div class="fee-actions"><a class="fee-btn" style="border-color:#b9c9d8;color:#0b2545" href="scholarships.html">Read scholarship information</a><a class="fee-btn" style="border-color:#b9c9d8;color:#0b2545" href="apply.html">Application information</a></div></div></section>
+
+<section class="fee-section" id="fee-rules">
+  <div class="container">
+    <h2>Course fees at a glance</h2>
+    <p class="fee-lead">
+      All courses have a minimum duration of three months. Tuition is paid monthly,
+      not all three months upfront. Your invoice and any approved scholarship are
+      confirmed by authorized SIFA staff.
+    </p>
+
+    <div class="fee-grid">
+      <article class="fee-card">
+        <span class="fee-tag">Rwanda</span>
+        <h3>Course tuition</h3>
+        <p>Monthly fee</p>
+        <div class="fee-price">10,000 RWF</div>
+        <p><strong>Three months:</strong> 30,000 RWF</p>
+        <p><strong>Optional certificate:</strong> 5,000 RWF</p>
+      </article>
+
+      <article class="fee-card">
+        <span class="fee-tag">Other African countries</span>
+        <h3>Course tuition</h3>
+        <p>Monthly fee</p>
+        <div class="fee-price">$15</div>
+        <p><strong>Three months:</strong> $45</p>
+        <p><strong>Optional certificate:</strong> $5</p>
+      </article>
+
+      <article class="fee-card">
+        <span class="fee-tag">Rest of the world</span>
+        <h3>Course tuition</h3>
+        <p>Monthly fee</p>
+        <div class="fee-price">$25</div>
+        <p><strong>Three months:</strong> $75</p>
+        <p><strong>Optional certificate:</strong> $10</p>
+      </article>
+    </div>
+
+    <div class="fee-notice">
+      <p><strong>Monthly payment deadline:</strong> Tuition is due on the first day of each month.</p>
+      <p><strong>Grace period:</strong> Payment may be made through the 14th day of that same month.</p>
+      <p>If the required tuition balance remains unpaid after the grace period, access to SIFA's protected learning services is suspended until the payment issue is resolved and payment is verified.</p>
+      <p><strong>Renewals:</strong> Monthly payments are handled manually by SIFA staff. No automatic recurring charge is taken.</p>
+    </div>
+  </div>
+</section>
+
+<section class="fee-section" style="background:#f5f8fb" id="scholarships">
+  <div class="container">
+    <h2>Scholarships and fee support</h2>
+    <p class="fee-lead">
+      SIFA offers scholarship support only when an opportunity is officially announced.
+      Scholarship information is public and can be read without signing in.
+    </p>
+
+    <div class="fee-grid">
+      <article class="fee-card">
+        <h3>Full-funded scholarship</h3>
+        <div class="fee-price">100%</div>
+        <p>Covers 100% of eligible course tuition for the period and under the conditions confirmed by SIFA.</p>
+      </article>
+
+      <article class="fee-card">
+        <h3>50% scholarship</h3>
+        <div class="fee-price">50%</div>
+        <p>Covers half of eligible course tuition. The student remains responsible for the other half of monthly tuition.</p>
+      </article>
+
+      <article class="fee-card">
+        <h3>Certificate fee</h3>
+        <p>The optional certificate fee is not covered by either scholarship type. It is charged separately only if the student requests a certificate after meeting the completion requirements.</p>
+      </article>
+    </div>
+
+    <div class="fee-warning">
+      <strong>Current scholarship status:</strong> No scholarship opportunity is currently open for applications.
+      SIFA will publish the eligibility requirements, deadlines, and application instructions when an opportunity officially opens.
+    </div>
+
+    <div class="fee-notice">
+      <strong>Payment deadline for scholarship students:</strong> The same monthly deadline and grace period apply to any remaining tuition balance. Any required balance is due on the 1st of the month, with a grace period through the 14th. If the required balance remains unpaid after the grace period, access to protected learning services is suspended until the issue is resolved and payment is verified.
+    </div>
+
+    <div class="fee-actions">
+      <a class="fee-btn" style="border-color:#b9c9d8;color:#0b2545" href="scholarships.html">Read scholarship information</a>
+      <a class="fee-btn" style="border-color:#b9c9d8;color:#0b2545" href="apply.html">Application information</a>
+    </div>
+  </div>
+</section>
+
 <section class="fee-section" id="payment-methods"><div class="container"><h2>Payment methods and direct payment details</h2><p class="fee-lead">Choose the payment method for your invoice currency. Check the recipient name and amount before confirming a transfer, and keep your transaction reference.</p><div class="fee-grid"><article class="fee-card"><h3>Rwanda · MTN Mobile Money</h3><p><strong>Recipient:</strong> IZABAKUZA JOSEPH</p><p><strong>Mobile Money number:</strong> <a href="tel:+250796965639">+250 796 965 639</a></p><p><strong>Currency:</strong> RWF</p><div class="fee-actions"><a class="fee-btn fee-btn-primary" href="tel:*182*1*1*250796965639%23">Open phone dialer</a><a class="fee-btn" href="https://wa.me/250796965639?text=Hello%2C%20I%20would%20like%20to%20confirm%20SIFA%20payment%20details." target="_blank" rel="noopener noreferrer">Contact recipient on WhatsApp</a></div><p class="muted">Confirm the recipient name shown by Mobile Money before authorizing payment. The dialer link may vary by phone/network; you can also use the number directly in your Mobile Money menu.</p></article><article class="fee-card"><h3>Türkiye · Ziraat Bankası</h3><p><strong>Account holder:</strong> Jean Bosco NKURIKIYUMUKIZA</p><p><strong>IBAN (TRY):</strong></p><p class="iban-value" style="overflow-wrap:anywhere;font-weight:700">TR55 0001 0090 1106 4323 2050 01</p><button type="button" class="fee-btn fee-copy-btn" data-copy="TR550001009011064323205001">Copy IBAN</button><p><strong>Bank:</strong> Ziraat Bankası</p><p><strong>Currency:</strong> TRY</p><p>Use your bank's transfer screen to make a domestic transfer. For international transfers, confirm the bank's required SWIFT/BIC and fees with Ziraat before sending.</p></article><article class="fee-card"><h3>Before you pay</h3><p>Use the amount and currency stated on your invoice. Enter your application/student reference or invoice reference in the transfer description when available.</p><p>Keep the receipt or transaction ID. SIFA staff must review and approve the payment; a transfer or receipt upload alone does not automatically activate learning access.</p><p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sifaglobalinstitute12@gmail.com&su=Confirm%20SIFA%20payment">Email SIFA to confirm a payment</a> · <a href="contact.html">Contact page</a></p></article></div><div class="fee-warning"><strong>Safety:</strong> never share your Mobile Money PIN, bank password, card security code or one-time password. Confirm the account holder and invoice amount before sending money.</div></div></section>
+
 <section class="fee-section" id="how-to-pay" style="background:#f5f8fb"><div class="container"><h2>How payment and receipt review work</h2><p class="fee-lead">Viewing fees and scholarship information is public. To submit a receipt against your own invoice, sign in to the student portal so the receipt can be associated with the correct account.</p><div class="fee-steps"><article class="fee-step"><h3>Confirm your invoice</h3><p>Contact SIFA or sign in to view your issued invoice, amount, currency and due date.</p></article><article class="fee-step"><h3>Request verified details</h3><p>Confirm official payment recipient details with <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sifaglobalinstitute12@gmail.com">sifaglobalinstitute12@gmail.com</a>.</p></article><article class="fee-step"><h3>Make payment and submit receipt</h3><p>Keep the transaction reference and submit a clear receipt file from your student account.</p></article><article class="fee-step"><h3>Wait for manual review</h3><p>An authorized SIFA reviewer verifies the receipt. Uploading a receipt alone does not mark an invoice as paid or unlock learning access.</p></article></div><div class="fee-actions"><a class="fee-btn" style="border:1px solid #b9c9d8;color:#0b2545" href="contact.html">Contact SIFA</a></div></div></section>
-<section class="fee-section"><div class="container"><h2>Frequently asked questions</h2><div class="fee-faq"><details><summary>Can I read the payment and scholarship information without logging in?</summary><p>Yes. This entire information page is public. Signing in is required only for private student records, invoices, and submitting a receipt tied to your account.</p></details><details><summary>Does submitting a receipt automatically activate my course?</summary><p>No. An authorized reviewer must verify and approve the payment or an applicable scholarship/fee waiver before course access can be granted.</p></details><details><summary>When is the monthly fee due, and is renewal automatic?</summary><p>The monthly fee is due on the first day of each month. SIFA staff handle monthly renewals manually; there is no automatic charge.</p></details><details><summary>How does the grace period work?</summary><p>A 14-day grace period applies after the due date. The student's actual access status depends on verified invoice status and the configured access policy. Ask SIFA if you need confirmation for your account.</p></details><details><summary>Can a scholarship pay for my certificate?</summary><p>No. Scholarships reduce monthly course fees only. The optional certificate fee is 5,000 RWF and is payable separately if you request a certificate after meeting the completion requirements.</p></details><details><summary>Are scholarship applications open now?</summary><p>No. There is currently no open scholarship opportunity. SIFA will publish specific criteria, reduction amounts and deadlines when an opportunity opens.</p></details><details><summary>What if I paid in a different currency?</summary><p>Confirm the correct invoice currency and amount with SIFA before making the transfer. Do not calculate or assume a conversion rate yourself.</p></details><details><summary>Where can I verify the official payment details?</summary><p>Email <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sifaglobalinstitute12@gmail.com">sifaglobalinstitute12@gmail.com</a> or use the <a href="contact.html">Contact page</a>. Verify the recipient and amount before transferring money.</p></details></div></div></section>
+
+<section class="fee-section">
+  <div class="container">
+    <h2>Frequently asked questions</h2>
+    <div class="fee-faq">
+      <details>
+        <summary>Can I read the payment and scholarship information without logging in?</summary>
+        <p>Yes. This information page is public. Signing in is required for private student records, invoices, and submitting a receipt tied to your account.</p>
+      </details>
+      <details>
+        <summary>How long is a course, and do I pay three months upfront?</summary>
+        <p>Courses have a minimum duration of three months, but tuition is paid monthly. The three-month amount shown on this page is the total for three months, not a requirement to pay all three months upfront.</p>
+      </details>
+      <details>
+        <summary>How much is tuition in my region?</summary>
+        <p>Students in Rwanda pay 10,000 RWF per month. Students in other African countries pay $15 per month. Students in the rest of the world pay $25 per month. Check your invoice or contact SIFA if you need confirmation of the applicable fee.</p>
+      </details>
+      <details>
+        <summary>When is monthly tuition due?</summary>
+        <p>Monthly tuition is due on the 1st day of each month. The grace period continues through the 14th day of that same month.</p>
+      </details>
+      <details>
+        <summary>What happens if I do not pay by the end of the grace period?</summary>
+        <p>If the required tuition balance remains unpaid after the 14th, access to SIFA's protected learning services is suspended until the payment issue is resolved and payment is verified.</p>
+      </details>
+      <details>
+        <summary>Do scholarship students also have a payment deadline?</summary>
+        <p>Yes. The same monthly deadline and grace period apply to any tuition balance that remains after a scholarship is applied.</p>
+      </details>
+      <details>
+        <summary>What do the full-funded and 50% scholarships cover?</summary>
+        <p>A full-funded scholarship covers 100% of eligible course tuition. A 50% scholarship covers half of eligible course tuition. The exact period and conditions are confirmed by SIFA.</p>
+      </details>
+      <details>
+        <summary>Does a scholarship cover the certificate fee?</summary>
+        <p>No. The optional certificate fee is separate and is not covered by either scholarship type. The fee is charged only if you request a certificate after meeting SIFA's completion requirements: 5,000 RWF in Rwanda, $5 in other African countries, or $10 in the rest of the world.</p>
+      </details>
+      <details>
+        <summary>Are scholarship applications open now?</summary>
+        <p>No. There is currently no open scholarship opportunity. SIFA will publish details when an opportunity officially opens.</p>
+      </details>
+      <details>
+        <summary>Does submitting a receipt automatically activate my course?</summary>
+        <p>No. An authorized SIFA reviewer must verify and approve the payment. Uploading a receipt alone does not mark an invoice as paid or automatically activate learning access.</p>
+      </details>
+      <details>
+        <summary>What if I need to pay in a different currency?</summary>
+        <p>Confirm the correct invoice currency and amount with SIFA before making the transfer. Do not assume an exchange rate or calculate a conversion yourself.</p>
+      </details>
+      <details>
+        <summary>Where can I verify the official payment details?</summary>
+        <p>Email <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=sifaglobalinstitute12@gmail.com">sifaglobalinstitute12@gmail.com</a> or use the <a href="contact.html">Contact page</a>. Verify the recipient and amount before transferring money.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section class="fee-section" id="student-actions"><div class="container"><h2>Quick links</h2><p class="fee-lead">Use these links to move directly to the related SIFA section.</p><div class="fee-links"><a class="fee-link" href="courses.html">Courses and course details<span>Review learning options and course information.</span></a><a class="fee-link" href="apply.html">Applications<span>Read application information and current admissions status.</span></a><a class="fee-link" href="scholarships.html">Scholarships<span>Read the scholarship overview and current status.</span></a><a class="fee-link" href="certifications.html">Certificates<span>Learn about SIFA certificates and completion information.</span></a><a class="fee-link" href="verify.html">Certificate verification<span>Open the certificate verification page.</span></a><a class="fee-link" href="learning.html">Learning<span>Explore learning information; protected access requires authorization.</span></a><a class="fee-link" href="privacy.html">Privacy policy<span>Review how information and personal documents should be handled.</span></a><a class="fee-link" href="contact.html">Contact SIFA<span>Find contact options and ask about an invoice or payment.</span></a></div></div></section>
+
 <div class="container pay-shell fee-form-wrap"><div id="payMessage" class="pay-message" role="status">Private payment tools load after account verification. All fee and scholarship information above is available without signing in.</div><section id="invoiceCard" class="pay-card" hidden><h2>Your invoices</h2><p>These invoices are private to your account.</p><div id="invoiceList" class="pay-list"></div></section><section id="receiptCard" class="pay-card" hidden><h2>Submit a payment receipt</h2><p class="muted">Submit only a receipt for a payment you actually made. Your receipt is sent for manual review and does not automatically activate course access.</p><form id="receiptForm" class="pay-form"><label>Invoice<select name="invoice_id" id="invoiceSelect" required></select></label><label>Payment method<select name="payment_method" required><option value="">Choose a method</option><option>Rwanda Mobile Money</option><option>Ziraat Bank Transfer</option></select></label><label>Amount paid<input name="claimed_amount" type="number" min="0.01" step="0.01" required></label><label>Currency<select name="claimed_currency" required><option value="">Choose currency</option><option>RWF</option><option>TRY</option></select></label><label>Transaction reference (if available)<input name="transaction_reference" maxlength="160"></label><label>Receipt file (PDF, JPG or PNG; max 5 MB)<input name="receipt" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></label><button id="receiptSubmit" class="btn btn-primary" type="submit">Submit receipt for review</button></form><p class="muted">Never send your bank password, PIN, card number or one-time password.</p></section></div>
+
 </main>
-<footer class="fee-footer"><div class="container fee-footer-grid"><div><img src="assets/sifa-logo.webp" alt="SIFA logo" style="width:86px;background:#fff;border-radius:50%;padding:4px"><h3>SIFA Global Institute</h3><p>Software Institute for Financial Accountants. Practical education in accounting technology, financial systems and digital professional tools.</p></div><div><h3>Explore</h3><p><a href="about.html">About SIFA</a></p><p><a href="courses.html">Courses</a></p><p><a href="apply.html">Applications</a></p><p><a href="learning.html">Learning</a></p></div><div><h3>Fees & credentials</h3><p><a href="student-payments.html">Fees, Payments & Scholarships</a></p><p><a href="scholarships.html">Scholarships</a></p><p><a href="certifications.html">Certification</a></p><p><a href="verify.html">Verify a Certificate</a></p><p><a href="privacy.html">Privacy Policy</a></p></div><div><h3>Contact</h3><p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sifaglobalinstitute12@gmail.com">sifaglobalinstitute12@gmail.com</a></p><p>Türkiye: <a href="tel:+905372746944">+90 537 274 6944</a></p><p>Rwanda: <a href="tel:+250782817643">+250 782 817 643</a></p><p><a href="contact.html">Contact page</a></p><div class="fee-social sifa-social-links" aria-label="SIFA Global Institute social media" style="display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:12px!important;width:max-content!important;height:40px!important;margin:16px 0 0!important;padding:0!important;line-height:1!important;">
+
+<footer class="site-footer">
+<div class="container footer-grid">
+  <div>
+    <img alt="SIFA Global Institute Logo" class="footer-logo" src="assets/sifa-logo.webp"/>
+    <h3>SIFA Global Institute</h3>
+    <p>Software Institute for Financial Accountants. Practical education in accounting technology, financial systems and digital professional tools.</p>
+  </div>
+  <div>
+    <h3>Explore</h3>
+    <a href="about.html">About SIFA</a>
+    <a href="courses.html">Courses</a>
+    <a href="apply.html">Applications</a>
+    <a href="learning.html">Learning</a>
+  </div>
+  <div>
+    <h3>Fees &amp; credentials</h3>
+    <a href="student-payments.html">Fees, Payments &amp; Scholarships</a>
+    <a href="scholarships.html">Scholarships</a>
+    <a href="certifications.html">Certification</a>
+    <a href="verify.html">Verify a Certificate</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <div>
+    <h3>Contact</h3>
+    <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=sifaglobalinstitute12@gmail.com">sifaglobalinstitute12@gmail.com</a>
+    <p>Türkiye:<br/>+90 537 274 6944</p>
+    <p>Rwanda:<br/>+250 782 817 643</p>
+    <a href="contact.html">Contact page</a>
+    <div class="sifa-social-links" aria-label="SIFA Global Institute social media" style="display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:12px!important;width:max-content!important;height:40px!important;margin:16px 0 0!important;padding:0!important;line-height:1!important;">
                 <a  style="display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important;flex:0 0 38px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;box-sizing:border-box!important;line-height:1!important;color:#E4405F!important;text-decoration:none!important;"href="https://instagram.com/sifaglobalinstitute" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
                 <a  style="display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important;flex:0 0 38px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;box-sizing:border-box!important;line-height:1!important;color:#1877F2!important;text-decoration:none!important;"href="https://facebook.com/SIFAGlobalInstitute" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3.2l.8-4H13V9c0-.7.3-1 1-1z"/></svg></a>
                 <a  style="display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important;flex:0 0 38px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;box-sizing:border-box!important;line-height:1!important;color:#0A66C2!important;text-decoration:none!important;"href="https://linkedin.com/in/sifa-global-institute-24a360288" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="4" height="11" fill="currentColor"/><circle cx="6" cy="5.5" r="2" fill="currentColor"/><path fill="currentColor" d="M11 9h4v1.5c1-1.2 2.2-2 4.2-2 3.3 0 4.8 2.1 4.8 6v5.5h-4v-5c0-1.8-.6-3-2.1-3-1.5 0-2.1 1.1-2.1 3v5h-4V9z"/></svg></a>
@@ -69,8 +368,21 @@
                 <a style="display:inline-flex!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important;flex:0 0 38px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;box-sizing:border-box!important;line-height:1!important;color:#25D366!important;text-decoration:none!important;" href="https://wa.me/250782817643" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp — Rwanda contact" title="WhatsApp — Rwanda contact">
                     <svg style="display:block!important;width:21px!important;height:21px!important;min-width:21px!important;max-width:21px!important;min-height:21px!important;max-height:21px!important;flex:0 0 21px!important;margin:0!important;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.52 3.48A11.8 11.8 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.1.55 4.15 1.6 5.96L.12 24l6.32-1.66a11.87 11.87 0 0 0 5.66 1.44h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.23-6.15-3.47-8.42ZM12.1 21.75a9.86 9.86 0 0 1-5.02-1.37l-.36-.21-3.75.98 1-3.65-.24-.38a9.84 9.84 0 0 1-1.51-5.24c0-5.45 4.44-9.89 9.9-9.89a9.82 9.82 0 0 1 7 2.9 9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.9 9.89Zm5.43-7.41c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.67-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.68-1.64-.93-2.24-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.8.37-.28.3-1.05 1.02-1.05 2.49s1.08 2.89 1.23 3.09c.15.2 2.12 3.24 5.13 4.54.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
                 </a>
-            </div></div></div></footer>
+            </div>
+  </div>
+</div>
+<div class="footer-bottom">
+  <div class="container">
+    <p>© <span data-year></span> SIFA Global Institute. All rights reserved.</p>
+    <p>Software Institute for Financial Accountants</p>
+  </div>
+</div>
+</footer>
+
 <script src="script.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="student-payments.js"></script><script>
+
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);const old=b.textContent;b.textContent='IBAN copied';setTimeout(()=>b.textContent=old,1800)}catch(e){const t=document.createElement('textarea');t.value=b.dataset.copy;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();b.textContent='IBAN copied';setTimeout(()=>b.textContent='Copy IBAN',1800)}}));
+
 </script>
+
 </body></html>

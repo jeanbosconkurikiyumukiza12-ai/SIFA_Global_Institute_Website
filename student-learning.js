@@ -20,5 +20,5 @@
    details.append(section)
   }
   const note=document.createElement("p");note.className="small";note.textContent="Do not forward class links or downloaded materials without permission. SIFA may verify enrollment and attendance.";details.append(note);details.hidden=false;
- }catch(e){show("We could not connect to the classroom service just now. Your course materials remain protected. Please try again later or return to the Student Portal for help.","error")}
+}catch(e){}
 })();
