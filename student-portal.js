@@ -4,6 +4,8 @@
   const $ = (id) => document.getElementById(id);
   const loginPanel = $('loginPanel'), signupPanel = $('signupPanel'), dashboard = $('studentDashboard');
   const message = $('portalMessage');
+  const loginMessage = $('loginMessage');
+  const signupMessage = $('signupMessage');
   let supabase = null;
   let currentUser = null;
   let bootComplete = false;
@@ -29,14 +31,39 @@
     // Keep the portal usable if URL parsing is unavailable.
   }
 
-  function showMessage(text, type='info') {
-    if (!message) return;
-    message.textContent = text;
-    message.className = 'portal-message ' + type;
-    message.hidden = false;
-    // Do not scroll the page. Action feedback should not move the student away from the control they used.
-  }
-  function hideMessage(){ if(message) message.hidden = true; }
+  
+function showMessage(text, type = 'info') {
+  const activePanel = !loginPanel.hidden
+    ? loginPanel
+    : !signupPanel.hidden
+      ? signupPanel
+      : null;
+
+  
+const target = activePanel === loginPanel && loginMessage
+  ? loginMessage
+  : activePanel === signupPanel && signupMessage
+    ? signupMessage
+    : message;
+
+  if (!target) return;
+
+  target.textContent = text;
+  target.className = 'portal-message ' + type;
+  target.setAttribute(
+    'role',
+    type === 'error' ? 'alert' : 'status'
+  );
+  target.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+  target.hidden = false;
+
+  target.scrollIntoView({
+    behavior: 'smooth',
+    block: 'nearest'
+  });
+}
+
+  function hideMessage(){ if(message) message.hidden = true; if(loginMessage) loginMessage.hidden = true; if(signupMessage) signupMessage.hidden = true; }
   function showLogin(messageText, type='info') {
     loginPanel.hidden=false; signupPanel.hidden=true; dashboard.hidden=true;
     if (messageText) showMessage(messageText, type); else hideMessage();
@@ -190,13 +217,26 @@
     if(!email)return showMessage('Enter your email address first.','error');
     const{error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
     if(error)return showMessage(error.message,'error');
-    showMessage('Password reset instructions have been sent to your email. Open the link in that email to set a new password.','success');
-  });
+    
+showMessage(
+  'If an account exists for this email address, password-reset instructions will be sent. Please check your inbox and spam folder.',
+  'success'
+);
+});
+
   $('loginForm')?.addEventListener('submit',async e=>{
     e.preventDefault();hideMessage();
     const email=$('loginEmail').value.trim(), password=$('loginPassword').value;
     const{data,error}=await supabase.auth.signInWithPassword({email,password});
-    if(error)return showMessage(error.message,'error');
+   
+if (error) {
+  console.error('Student sign-in failed:', error);
+  return showMessage(
+    'Unable to sign in. The email address or password is incorrect. Please check your details and try again.',
+    'error'
+  );
+}
+
     await loadUser(data.user);
   });
   $('signupForm')?.addEventListener('submit', async e => {
@@ -229,9 +269,14 @@
     }
   });
 
-  if (error) {
-    return showMessage(error.message, 'error');
-  }
+  
+if (error) {
+  console.error('SIFA account registration failed:', error);
+  return showMessage(
+    'We could not create your account. Please check your details and try again. If the problem continues, contact SIFA support.',
+    'error'
+  );
+}
 
   if (data.user) {
     const { error: profileError } = await supabase
@@ -247,18 +292,21 @@
     }
   }
 
-  if (!data.session) {
-    showLogin(
-      'Your account request was received! Please check your email and click the confirmation link to activate your SIFA Global Institute account.',
-      'success'
-    );
-  } else {
-    await loadUser(data.user);
-    showMessage(
-      'Welcome to SIFA Global Institute! Your account has been created successfully.',
-      'success'
-    );
-  }
+  
+    if (!data.session) {
+      showSignup();
+      showMessage(
+        'Account request received! Please check your inbox for the SIFA verification email. Open the link to activate your account.',
+        'success'
+      );
+    } else {
+      await loadUser(data.user);
+      showMessage(
+        'Welcome to SIFA Global Institute! Your account has been created successfully.',
+        'success'
+      );
+    }
+    
 });
   $('profileForm')?.addEventListener('submit',async e=>{
     e.preventDefault();if(!currentUser)return;
@@ -270,6 +318,45 @@
     if(error)return showMessage(error.message,'error');
     renderProfile(currentUser,data);showMessage('Your account information has been updated.','success');
   });
+
+  $('emailChangeForm')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!currentUser) return showMessage('Please sign in again before changing your email address.', 'error');
+    const nextEmail = $('newEmail').value.trim();
+    const target = $('emailChangeMessage');
+    const btn = $('requestEmailChangeBtn');
+    if (!nextEmail) return;
+    if (nextEmail.toLowerCase() === String(currentUser.email || '').toLowerCase()) {
+      if (target) { target.textContent = 'This is already your current login email address.'; target.className = 'portal-message warning'; target.hidden = false; }
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Sending confirmation…';
+    if (target) target.hidden = true;
+    try {
+      const { error } = await supabase.auth.updateUser(
+        { email: nextEmail },
+        { emailRedirectTo: `${location.origin}${location.pathname}` }
+      );
+      if (error) {
+        if (target) { target.textContent = error.message || 'We could not start the email-change process. Please try again.'; target.className = 'portal-message error'; target.hidden = false; }
+        return;
+      }
+      if (target) {
+        target.textContent = 'Confirmation instructions have been requested. Please check the relevant inboxes and complete Supabase’s confirmation process. Your login email will remain unchanged until confirmation is complete.';
+        target.className = 'portal-message success';
+        target.hidden = false;
+      }
+      $('newEmail').value = '';
+    } catch (error) {
+      console.error('Email change request failed:', error);
+      if (target) { target.textContent = 'We could not request the email change right now. Please try again or contact SIFA support.'; target.className = 'portal-message error'; target.hidden = false; }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Request Email Change';
+    }
+  });
+
   $('resetPasswordBtn')?.addEventListener('click',()=>openPasswordPanel(false));
   $('cancelPasswordBtn')?.addEventListener('click',closePasswordPanel);
   $('cancelPasswordBtn2')?.addEventListener('click',closePasswordPanel);

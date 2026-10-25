@@ -16,25 +16,29 @@
 </style>
 
 <style id="sifa-streamlined-portal">
-/* Streamlined student dashboard: only two primary destinations */
-#studentDashboard .dashboard-grid,
-#studentDashboard > .application-card,
-#studentDashboard > .classroom-launch,
-#studentDashboard > .dashboard-actions {display:none!important}
-#studentDashboard .student-summary{margin-bottom:22px}
-.sifa-student-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:18px 0 24px}
-.sifa-student-action{border:1px solid #dce6ef;border-radius:18px;background:#fff;padding:24px;box-shadow:0 8px 24px rgba(8,30,54,.06)}
-.sifa-student-action h3{margin:0 0 8px;color:#0b2545;font-size:1.25rem}
-.sifa-student-action p{color:#53677b;line-height:1.6;margin:0 0 18px}
-.sifa-student-action .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px}
-.sifa-detail-panel{border:1px solid #dce6ef;border-radius:16px;padding:22px;margin:18px 0;background:#fff}
-.sifa-detail-panel[hidden]{display:none!important}
-.sifa-detail-panel h3{margin-top:0;color:#0b2545}
-.sifa-action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.sifa-state{padding:13px 15px;border-radius:10px;background:#f5f8fb;border:1px solid #dce6ef;color:#30475c}
-.sifa-state.error{background:#fff5f5;border-color:#efcaca;color:#8a2d2d}
-.sifa-state.success{background:#f1faf5;border-color:#bfe2cc;color:#1d6a3d}
-@media(max-width:650px){.sifa-student-actions{grid-template-columns:1fr}.sifa-student-action{padding:19px}}
+/* SIFA student portal: three main destinations and separate detail views */
+#studentDashboard .dashboard-grid > .quickbooks-card { display:none !important; }
+#studentDashboard .student-summary { margin-bottom:22px; }
+.sifa-student-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin:18px 0 24px; }
+.sifa-student-action { border:1px solid #dce6ef; border-radius:18px; background:#fff; padding:24px; box-shadow:0 8px 24px rgba(8,30,54,.06); }
+.sifa-student-action h3 { margin:0 0 8px; color:#0b2545; font-size:1.25rem; }
+.sifa-student-action p { color:#53677b; line-height:1.6; margin:0 0 18px; }
+.sifa-student-action .btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; }
+.sifa-detail-panel { border:1px solid #dce6ef; border-radius:16px; padding:22px; margin:18px 0; background:#fff; }
+.sifa-detail-panel[hidden], #studentDashboard [hidden] { display:none !important; }
+.sifa-detail-panel h3 { margin-top:0; color:#0b2545; }
+.sifa-action-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.sifa-state { padding:13px 15px; border-radius:10px; background:#f5f8fb; border:1px solid #dce6ef; color:#30475c; }
+.sifa-state.error { background:#fff5f5; border-color:#efcaca; color:#8a2d2d; }
+.sifa-state.success { background:#f1faf5; border-color:#bfe2cc; color:#1d6a3d; }
+.sifa-view-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+.sifa-view-heading h3 { margin:0; }
+.email-change-panel { margin:20px 0; padding:18px; border:1px solid #dce6ef; border-radius:14px; background:#f8fbfd; }
+.email-change-panel h4 { margin:0 0 8px; color:#0b2545; }
+.email-change-panel > p { font-size:13px; line-height:1.6; }
+#emailChangeMessage { margin-top:12px; }
+@media(max-width:850px) { .sifa-student-actions { grid-template-columns:1fr; } }
+@media(max-width:650px) { .sifa-student-action { padding:19px; } .sifa-detail-panel { padding:16px; } }
 </style>
 <link rel="icon" type="image/png" href="assets/sifa-logo.png">
 
@@ -45,15 +49,22 @@
 <a class="brand" href="index.html"><img src="assets/sifa-logo.png" alt="SIFA Global Institute logo"><span>SIFA Global Institute<small>Software Institute for Financial Accountants</small></span></a>
 <button class="menu" aria-label="Open menu">☰</button>
 <nav><ul>
-<li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="founder.html">Founder</a></li><li><a href="courses.html">Courses</a></li><li><a href="learning.html">Learning</a></li><li><a href="student-learning.html">My Learning</a></li><li><a href="student-payments.html">Fees &amp; Scholarship</a></li><li><a href="certifications.html">Certification</a></li><li><a href="resources.html">Resources</a></li><li><a href="ai-support.html">SIFA AI</a></li><li><a href="contact.html">Contact</a></li><li><a class="nav-cta" href="student-portal.html">Student Portal</a></li>
+<li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="founder.html">Founder</a></li><li><a href="courses.html">Courses</a></li><li><a href="learning.html">Learning</a></li><li><a href="student-learning.html">My Learning</a></li><li><a href="certifications.html">Certification</a></li><li><a href="resources.html">Resources</a></li><li><a href="ai-support.html">SIFA AI</a></li><li><a href="student-payments.html">Fees &amp; Scholarship</a></li><li><a href="contact.html">Contact</a></li><li><a class="nav-cta" href="student-portal.html">Student Portal</a></li>
 </ul></nav></div></header>
 <main>
 <section class="page-hero"><div class="container"><span class="eyebrow">Student Portal</span><h1>Your SIFA student account.</h1><p>Sign in to manage your account, application and learning journey in one secure place.</p></div></section>
 <section><div class="container portal-shell">
 <div id="portalMessage" class="portal-message" hidden></div>
 <div id="portalForms" class="portal-grid">
-<div id="loginPanel" class="portal-card"><h2>Welcome back</h2><p>Sign in to continue to your student portal.</p><form id="loginForm" class="portal-form"><label>Email address<input id="loginEmail" type="email" autocomplete="off" placeholder="Enter your email address" required></label><label>Password<input id="loginPassword" type="password" autocomplete="new-password" placeholder="Enter your password" required></label><div class="portal-actions"><button class="btn btn-primary" type="submit">Sign In</button><button id="forgotPassword" class="portal-link" type="button">Forgot password?</button></div></form><p style="margin-top:18px">New to SIFA? <button id="showSignup" class="portal-link" type="button">Create a student account</button></p></div>
-<div id="signupPanel" class="portal-card" hidden><h2>Create your account</h2><p>Use an email address you can access. SIFA will use it for account verification and important application communication.</p><form id="signupForm" class="portal-form"><label>Full name<input id="signupName" type="text" autocomplete="name" required></label><label>Email address<input id="signupEmail" type="email" autocomplete="email" required></label><label>Password<input id="signupPassword" type="password" autocomplete="new-password" minlength="8" required></label><label>Confirm password<input id="signupConfirm" type="password" autocomplete="new-password" minlength="8" required></label><div class="portal-actions"><button class="btn btn-primary" type="submit">Create Account</button><button id="showLogin" class="portal-link" type="button">Back to sign in</button></div></form></div>
+<div id="loginPanel" class="portal-card"><h2>Welcome back</h2><p>Sign in to continue to your student portal.</p><form id="loginForm" class="portal-form"><label>Email address<input id="loginEmail" type="email" autocomplete="off" placeholder="Enter your email address" required></label><label>Password<input id="loginPassword" type="password" autocomplete="new-password" placeholder="Enter your password" required></label><div class="portal-actions"><button class="btn btn-primary" type="submit">Sign In</button><button id="forgotPassword" class="portal-link" type="button">Forgot password?</button></div></form>
+
+   <div id="loginMessage" class="portal-message" role="status" aria-live="polite" hidden></div>
+   <p style="margin-top:18px">New to SIFA? <button id="showSignup" class="portal-link" type="button">Create a student account</button></p></div>
+<div id="signupPanel" class="portal-card" hidden><h2>Create your account</h2><p>Use an email address you can access. SIFA will use it for account verification and important application communication.</p><form id="signupForm" class="portal-form"><label>Full name<input id="signupName" type="text" autocomplete="name" required></label><label>Email address<input id="signupEmail" type="email" autocomplete="email" required></label><label>Password<input id="signupPassword" type="password" autocomplete="new-password" minlength="8" required></label><label>Confirm password<input id="signupConfirm" type="password" autocomplete="new-password" minlength="8" required></label><div class="portal-actions"><button class="btn btn-primary" type="submit">Create Account</button><button id="showLogin" class="portal-link" type="button">Back to sign in</button></div>
+</form>
+<div id="signupMessage" class="portal-message" role="status" aria-live="polite" hidden></div>
+</div>
+
 </div>
 <div id="studentDashboard" class="portal-dashboard" hidden>
 <div class="student-summary"><div><div class="eyebrow" style="color:#62c78a;margin-bottom:8px">Student Account</div><h2>Welcome, <span id="studentName">Student</span></h2><p id="studentEmail"></p></div><div class="summary-meta"><span class="status-pill" id="applicationStatus">Not started</span><small>Application reference: <span id="applicationRef">—</span></small></div></div>
@@ -61,15 +72,33 @@
 <div class="sifa-student-actions" aria-label="Student destinations">
 <section class="sifa-student-action"><h3>Application</h3><p>Submit an application, continue an available application, or check your application status and reference number.</p><button type="button" class="btn btn-primary" id="sifaOpenApplication">Open Application</button></section>
 <section class="sifa-student-action"><h3>SIFA Classroom</h3><p>Check your course access and, once authorized, enter your private learning area for live classes and course materials.</p><button type="button" class="btn btn-primary" id="sifaOpenClassroom">Open SIFA Classroom</button><div id="sifaClassroomAccessState" class="sifa-state" style="margin-top:12px" hidden></div></section>
+
+<section class="sifa-student-action">
+  <h3>Account Settings</h3>
+  <p>Update your personal information, change your email address, and manage your password and account security.</p>
+  <button type="button" class="btn btn-primary" id="sifaOpenAccount">
+    Manage My Account
+  </button>
+</section>
+
 </div>
 <section id="sifaApplicationPanel" class="sifa-detail-panel" hidden><h3>Application</h3><p id="sifaApplicationSummary">Loading your application status…</p><div class="sifa-action-row"><a id="sifaApplyLink" class="btn btn-primary" href="apply.html">Apply / Continue Application</a><button type="button" class="btn btn-secondary" id="sifaCloseApplication">Back to Student Portal</button></div><div id="sifaApplicationStatusDetail" style="margin-top:18px"></div></section>
-<div class="dashboard-grid">
-<section class="account-card" id="my-account"><h3>My Account</h3><p>Manage your personal details and account security. Your login email is linked to your SIFA account.</p>
+<div class="dashboard-grid" id="sifaAccountGrid" hidden>
+<section class="account-card" id="my-account"><div class="sifa-view-heading"><h3>Account Settings</h3><button type="button" class="btn btn-secondary" id="sifaCloseAccount">Back to Student Portal</button></div><p>Manage your personal details and account security. Your login email is linked to your SIFA account.</p>
 <form id="profileForm" class="portal-form"><div class="account-grid">
 <div class="account-item"><span>Email</span><strong id="accountEmail">—</strong><small class="account-hint">Login email</small></div><div class="account-item"><span>Account status</span><strong id="accountStatus">Active</strong></div><div class="account-item"><span>Email verification</span><strong id="emailStatus">—</strong></div><div class="account-item"><span>Member since</span><strong id="memberSince">—</strong></div></div>
 <label>Full name <span class="field-required">Required</span><input id="profileName" type="text" autocomplete="name" required></label>
 <div class="account-grid"><label>Phone <span class="field-optional">Optional</span><input id="profilePhone" type="tel" autocomplete="tel" placeholder="e.g. +250 7xx xxx xxx"></label><label>Country <span class="field-optional">Optional</span><input id="profileCountry" type="text" autocomplete="country-name" placeholder="e.g. Rwanda"></label></div>
 <p class="profile-help">Full name is required. Phone and country can be updated at any time.</p><div class="portal-actions"><button class="btn btn-primary" type="submit" id="saveProfileBtn">Save Changes</button></div></form>
+<section class="email-change-panel" aria-labelledby="emailChangeHeading">
+  <h4 id="emailChangeHeading">Change email address</h4>
+  <p>Enter your new email address. Supabase will send a confirmation message; your login email changes only after the required confirmation is completed.</p>
+  <form id="emailChangeForm" class="portal-form">
+    <label>New email address <span class="field-required">Required</span><input id="newEmail" type="email" autocomplete="email" placeholder="Enter your new email address" required></label>
+    <div class="portal-actions"><button class="btn btn-primary" type="submit" id="requestEmailChangeBtn">Request Email Change</button></div>
+  </form>
+  <div id="emailChangeMessage" class="portal-message" role="status" aria-live="polite" hidden></div>
+</section>
 <div class="security-row"><div><strong>Password &amp; security</strong><p style="margin:4px 0 0;font-size:13px">Change your password securely without leaving your account.</p></div><button id="resetPasswordBtn" class="portal-link" type="button">Change password</button></div>
 <div id="passwordChangePanel" class="password-panel" hidden>
   <div class="password-panel-head"><div><h4 id="passwordPanelTitle">Change your password</h4><p id="passwordPanelText">Enter and confirm your new password below.</p></div><button id="cancelPasswordBtn" type="button" class="modal-close" aria-label="Close">×</button></div>
@@ -84,7 +113,7 @@
 <section class="quickbooks-card"><span class="course-badge closed-badge">ADMISSIONS CLOSED</span><h3>QuickBooks Practical Training</h3><p>Practical training in setup, transactions, reconciliation, reporting and accounting workflows.</p><div class="account-grid" style="margin-top:18px"><div class="account-item"><span>Learning model</span><strong>Learn → Practice → Apply</strong></div><div class="account-item"><span>Application status</span><strong id="quickbooksStatus">Not available</strong></div></div><div class="portal-actions" style="margin-top:18px"><a id="applyPortalBtn" class="btn btn-disabled" href="apply.html" aria-disabled="true">Applications Closed</a><a class="btn btn-secondary" href="courses.html">View Courses</a></div></section>
 </div>
 
-<section class="application-card" id="my-application"><h3>My Application</h3><p id="applicationNote">Your application information will appear here after you submit it.</p>
+<section class="application-card" id="my-application" hidden><h3>My Application</h3><p id="applicationNote">Your application information will appear here after you submit it.</p>
 <div id="applicationDetails" class="application-grid">
 <div class="application-item"><span>Status</span><strong id="detailStatus">Not started</strong></div><div class="application-item"><span>Reference</span><strong id="detailReference">—</strong></div><div class="application-item"><span>Program</span><strong id="detailProgram">—</strong></div><div class="application-item"><span>Learning mode</span><strong id="detailMode">—</strong></div><div class="application-item"><span>Cohort</span><strong id="detailCohort">—</strong></div><div class="application-item"><span>Submitted</span><strong id="detailSubmitted">—</strong></div><div class="application-item"><span>Schedule</span><strong id="detailSchedule">—</strong></div><div class="application-item"><span>Latest update</span><strong id="detailUpdated">—</strong></div>
 </div>
@@ -94,7 +123,7 @@
 <div id="applicationEmpty" class="empty-state" style="margin-top:14px">No application has been submitted. Admissions are currently closed.</div><div id="applicationHistory" class="history-list"></div>
 </section>
 
-<section class="classroom-launch" id="my-classroom" aria-labelledby="classroomTitle">
+<section class="classroom-launch" id="my-classroom" hidden aria-labelledby="classroomTitle">
 <style>
 .classroom-launch{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;padding:28px;border-radius:18px;border:1px solid #b9e3ca;background:linear-gradient(120deg,#f0fbf5,#ffffff 72%);box-shadow:0 10px 28px rgba(7,26,51,.05)}
 .classroom-launch .classroom-kicker{display:inline-block;color:#19733f;font-size:12px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px}
@@ -137,33 +166,60 @@
 
 <script>
 (function(){
- const $=id=>document.getElementById(id);
- const appPanel=$('sifaApplicationPanel'), classroomState=$('sifaClassroomAccessState');
- function revealApp(){
-   if(appPanel) appPanel.hidden=false;
-   const legacy=$('my-application');
-   if(legacy){
-     legacy.style.display='block';
-     $('sifaApplicationSummary').textContent='Your application status and reference are shown below when available.';
-     $('sifaApplicationStatusDetail').appendChild(legacy);
-   }
-   appPanel?.scrollIntoView({behavior:'smooth',block:'start'});
- }
- $('sifaOpenApplication')?.addEventListener('click',revealApp);
- $('sifaCloseApplication')?.addEventListener('click',()=>{
-   if(appPanel) appPanel.hidden=true;
-   const legacy=$('my-application');
-   if(legacy){legacy.style.display='';$('studentDashboard')?.appendChild(legacy);}
-   window.scrollTo({top:0,behavior:'smooth'});
- });
- $('sifaOpenClassroom')?.addEventListener('click',()=>{
-   if(!classroomState)return;
-   classroomState.hidden=false;
-   classroomState.className='sifa-state';
-   classroomState.textContent='Checking your signed-in account and course access…';
-   // Keep the server-side classroom check as the authority. A destination error is not interpreted as unpaid.
-   window.location.href='student-learning.html';
- });
+  const $ = id => document.getElementById(id);
+  const dashboard = $('studentDashboard');
+  const summary = dashboard?.querySelector('.student-summary');
+  const actions = dashboard?.querySelector('.sifa-student-actions');
+  const accountGrid = $('sifaAccountGrid');
+  const appPanel = $('sifaApplicationPanel');
+  const legacyApp = $('my-application');
+
+  function moveApplicationIntoPanel(){
+    if (legacyApp && $('sifaApplicationStatusDetail') && legacyApp.parentElement !== $('sifaApplicationStatusDetail')) {
+      $('sifaApplicationStatusDetail').appendChild(legacyApp);
+    }
+  }
+  function showHome(){
+    if (summary) summary.hidden = false;
+    if (actions) actions.hidden = false;
+    if (accountGrid) accountGrid.hidden = true;
+    if (appPanel) appPanel.hidden = true;
+    if (legacyApp) legacyApp.hidden = true;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function showApplication(){
+    if (summary) summary.hidden = true;
+    if (actions) actions.hidden = true;
+    if (accountGrid) accountGrid.hidden = true;
+    moveApplicationIntoPanel();
+    if (legacyApp) legacyApp.hidden = false;
+    if (appPanel) appPanel.hidden = false;
+    $('sifaApplicationSummary').textContent = 'Your application status, reference number, and submitted details are shown below when available.';
+    appPanel?.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function showAccount(){
+    if (summary) summary.hidden = true;
+    if (actions) actions.hidden = true;
+    if (appPanel) appPanel.hidden = true;
+    if (legacyApp) legacyApp.hidden = true;
+    if (accountGrid) accountGrid.hidden = false;
+    $('my-account')?.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  $('sifaOpenApplication')?.addEventListener('click', showApplication);
+  $('sifaOpenAccount')?.addEventListener('click', showAccount);
+  $('sifaCloseApplication')?.addEventListener('click', showHome);
+  $('sifaCloseAccount')?.addEventListener('click', showHome);
+  $('sifaOpenClassroom')?.addEventListener('click', () => {
+    const state = $('sifaClassroomAccessState');
+    if (state) {
+      state.hidden = false;
+      state.className = 'sifa-state';
+      state.textContent = 'Checking your signed-in account and course access…';
+    }
+    // The classroom page and server-side API remain responsible for access authorization.
+    window.location.href = 'student-learning.html';
+  });
 })();
 </script>
 
