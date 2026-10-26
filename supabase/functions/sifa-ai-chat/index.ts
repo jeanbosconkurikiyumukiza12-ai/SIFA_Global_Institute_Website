@@ -1,5 +1,6 @@
 
 const allowedOrigins = [
+  "https://sifaglobalinstitute.github.io",
   "https://sifaglobalinstitutewebsite.vercel.app",
   "https://sifaglobalinstitute.com",
   "http://127.0.0.1:5500",
