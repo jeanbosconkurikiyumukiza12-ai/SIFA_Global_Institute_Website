@@ -138,6 +138,126 @@
  .home-software-visual .software-image img{height:320px;}
  .home-global-visual .global-image{min-height:300px;}
 }
+/* SIFA Rwanda Country Coordinator profile */
+.joseph-profile-section {
+  padding: 48px 24px;
+  background: linear-gradient(135deg, #edf5fc, #eaf7f0);
+}
+
+.joseph-profile-card {
+  max-width: 1190px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  background: #ffffff;
+  border: 1px solid #dce8f2;
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgba(16, 45, 82, 0.10);
+}
+.joseph-profile-photo {
+  flex: 0 0 390px;
+  width: 390px;
+}
+
+.joseph-profile-photo img {
+  display: block;
+ width: 390px;
+height: 430px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 18px;
+  border: 3px solid #d7eee4;
+  box-shadow: 0 12px 28px rgba(16, 45, 82, 0.16);
+}
+
+.joseph-profile-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.joseph-profile-label {
+  color: #168451;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.joseph-profile-content h2 {
+  margin: 10px 0 4px;
+  color: #102e52;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.joseph-profile-content h3 {
+  margin: 0 0 16px;
+  color: #168451;
+  font-size: 17px;
+}
+
+.joseph-profile-content p {
+  margin: 0 0 12px;
+  color: #52677f;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.joseph-profile-focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.joseph-profile-focus span {
+  padding: 7px 10px;
+  color: #164b3a;
+  background: #e8f6ee;
+  border: 1px solid #ccebd9;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 650px) {
+  .joseph-profile-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .joseph-profile-photo {
+    flex-basis: auto;
+  }
+
+  .joseph-profile-photo img {
+    width: 150px;
+    height: 175px;
+  }
+
+  .joseph-profile-content h2 {
+    font-size: 25px;
+  }
+}
+.joseph-contact-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 22px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #168451, #20a464);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(22, 132, 81, 0.18);
+}
+
+.joseph-contact-link:hover {
+  color: #ffffff;
+  background: #116b41;
+}
 </style>
 </head>
 <body>
@@ -340,7 +460,6 @@
 <img alt="Laptop displaying an illustrative financial dashboard in a modern accounting workspace" src="assets/home-photos/home-software.webp"/>
 </div>
 </div>
-<p class="home-image-note">The dashboard shown is illustrative and is not a representation of a specific software vendor interface.</p>
 </div>
 </section>
 <section class="light home-founder">
@@ -419,6 +538,46 @@
 <p>These photographs are illustrative. They are not presented as SIFA students, staff, or official classroom participants.</p>
 </div>
 </div>
+</div>
+<div class="joseph-profile-section">
+  <div class="joseph-profile-card">
+    <div class="joseph-profile-photo">
+      <img
+        src="assets/joseph-professional.png"
+        alt="Joseph IZABAKUZA, Rwanda Country Coordinator"
+      >
+    </div>
+
+    <div class="joseph-profile-content">
+      <span class="joseph-profile-label">COUNTRY COORDINATION</span>
+      <h2>Joseph IZABAKUZA</h2>
+      <h3>Rwanda Country Coordinator</h3>
+
+      <p>
+        Joseph IZABAKUZA supports SIFA Global Institute’s engagement
+        and development in Rwanda. He contributes to institutional
+        communication, learner support, and coordination activities,
+        helping strengthen SIFA’s connection with learners and the
+        wider accounting and finance community.
+      </p>
+
+      <p>
+        With practical skills in accounting software and digital
+        financial tools, he supports SIFA’s commitment to accessible,
+        technology-driven financial education and the Learn, Practice,
+        Apply approach.
+      </p>
+
+      <a
+  class="joseph-contact-link"
+  href="https://wa.me/250796965639"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Contact Rwandan students Coordinator
+</a>
+    </div>
+  </div>
 </div>
 </section>
 <section class="home-cta">

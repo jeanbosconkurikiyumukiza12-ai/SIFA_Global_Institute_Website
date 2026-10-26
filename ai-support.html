@@ -21,7 +21,10 @@
 .ai-secondary{border:1px solid rgba(255,255,255,.35);color:#fff}
 
 .ai-main{padding:48px 0 72px}
-.ai-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:28px;align-items:start}
+.ai-layout{
+  display:block;
+  width:100%;
+}
 .ai-chat,.ai-side-card{background:#fff;border:1px solid #dfe7ef;border-radius:18px;box-shadow:0 12px 34px rgba(7,26,51,.08)}
 .ai-chat-head{padding:22px 24px;border-bottom:1px solid #e5ebf1;background:#f7fafc}
 .ai-chat-head h2{margin:0 0 5px}
@@ -77,6 +80,392 @@
   .ai-main{padding:34px 0 52px}
   .ai-form,.ai-chat-head{padding:20px}
 }
+
+/* ===== SIFA AI Professional Redesign ===== */
+.ai-page {
+  background: #f3f7fc;
+}
+
+
+.ai-page .ai-hero {
+  padding: 48px 40px;
+  background:
+    radial-gradient(ellipse at top right, rgba(83, 201, 139, 0.18), transparent 42%),
+    linear-gradient(135deg, #071b33 0%, #10365c 58%, #0b2945 100%);
+  min-height: 360px;
+  color: #ffffff;
+}
+
+
+.ai-page .ai-hero > .container {
+  max-width: 1240px;
+  width: calc(100% - 40px);
+}
+
+
+.ai-page .ai-hero h1 {
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 12px 0;
+  letter-spacing: -1px;
+}
+
+
+.ai-page .ai-hero .eyebrow {
+  color: #168451;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+
+.ai-page .ai-hero p {
+  color: #e7eef8;
+  line-height: 1.7;
+}
+
+
+.ai-page .ai-hero .ai-chat,
+.ai-page .ai-hero .ai-chat-card,
+.ai-page .ai-hero .chat-card {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  border: 1px solid #d8e4f2;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 18px 50px rgba(16, 46, 82, 0.09);
+  overflow: hidden;
+}
+
+.ai-page .ai-form,
+.ai-page .ai-chat-head {
+  padding: 20px 24px;
+}
+
+.ai-page .ai-form {
+  background: #ffffff;
+  border-top: 1px solid #e2eaf4;
+}
+
+.ai-page textarea,
+.ai-page .ai-form textarea {
+  width: 100%;
+  min-height: 110px;
+  box-sizing: border-box;
+  border: 1.5px solid #cbd9e9;
+  border-radius: 14px;
+  padding: 16px;
+  font: inherit;
+  line-height: 1.6;
+  color: #183654;
+  background: #f8fbff;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ai-page textarea:focus,
+.ai-page .ai-form textarea:focus {
+  outline: none;
+  border-color: #27865a;
+  box-shadow: 0 0 0 4px rgba(39, 134, 90, 0.12);
+}
+
+.ai-page .ai-message {
+  max-width: 88%;
+  padding: 18px 20px;
+  margin: 14px 0;
+  border-radius: 18px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+.ai-page .ai-message.assistant {
+  margin-right: auto;
+  color: #243c56;
+ background: linear-gradient(135deg, #edf5fc 0%, #eaf7f0 100%);
+  border: 1px solid #dce7f3;
+  border-bottom-left-radius: 5px;
+}
+
+.ai-page .ai-message.user {
+  margin-left: auto;
+  color: #ffffff;
+  background: #12345b;
+  border: 1px solid #12345b;
+  border-bottom-right-radius: 5px;
+}
+
+.ai-page .ai-message small {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.ai-page .ai-message.assistant strong {
+  color: #12345b;
+}
+
+.ai-page .ai-edit-message {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 11px;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.ai-page .ai-edit-message:hover {
+  background: rgba(128, 150, 175, 0.12);
+}
+
+.ai-page .ai-form button,
+.ai-page .ai-form input[type="submit"] {
+  border-radius: 999px;
+}
+
+@media (max-width: 700px) {
+  .ai-page .ai-hero > .container {
+    width: calc(100% - 24px);
+  }
+
+  .ai-page .ai-hero {
+    padding: 16px 0 24px;
+  }
+
+  .ai-page .ai-hero h1 {
+    font-size: 30px;
+  }
+
+  .ai-page .ai-message {
+    max-width: 96%;
+    padding: 14px;
+  }
+
+  .ai-page .ai-form,
+  .ai-page .ai-chat-head {
+    padding: 16px;
+  }
+}
+
+/* SIFA AI — final layout and readability fixes */
+.ai-page .ai-hero {
+  min-height: auto;
+  color: #193653;
+}
+
+.ai-page .ai-hero p {
+  color: #e7eef8;
+  line-height: 1.7;
+}
+.ai-page .ai-hero .hero-actions a,
+.ai-page .ai-hero .hero-actions .secondary {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ai-page .ai-hero .hero-actions a:hover,
+.ai-page .ai-hero .hero-actions .secondary:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.ai-page .ai-hero > .container {
+  max-width: 1440px;
+  width: calc(100% - 48px);
+}
+
+.ai-page .ai-hero > .container > .ai-chat,
+.ai-page .ai-hero > .container > .ai-chat-card,
+.ai-page .ai-hero > .container > .chat-card {
+  width: 100%;
+  max-width: none;
+}
+
+.ai-page .ai-hero h1 {
+  font-size: clamp(30px, 3vw, 40px);
+}
+
+@media (max-width: 700px) {
+  .ai-page .ai-hero > .container {
+    width: calc(100% - 24px);
+  }
+}
+/* SIFA AI — polished chat layout */
+.ai-page .ai-chat,
+.ai-page .ai-chat-card,
+.ai-page .ai-chat-card {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  border: 1px solid #dbe6f2;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 16px 40px rgba(16, 42, 76, 0.08);
+}
+
+.ai-page .ai-chat-head {
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #f0f6ff, #e8f7f0);
+  border-bottom: 1px solid #dbe6f2;
+}
+
+.ai-page .ai-chat-head h2 {
+  font-size: 26px;
+  line-height: 1.3;
+  margin: 0;
+  color: #102e52;
+}
+
+.ai-page .ai-message {
+  border-radius: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.ai-page .ai-form textarea {
+  border: 1px solid #cbd9e8;
+  border-radius: 14px;
+  background: #f8fbff;
+  padding: 16px;
+}
+
+.ai-page .ai-form button[type="submit"] {
+  background: #102e52;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 13px 22px;
+}
+
+.ai-page .ai-form button[type="submit"]:hover {
+  background: #1b4778;
+}
+
+@media (max-width: 700px) {
+  .ai-page .ai-chat,
+  .ai-page .ai-chat-card {
+    width: calc(100% - 20px);
+    border-radius: 14px;
+  }
+
+  .ai-page .ai-chat-head h2 {
+    font-size: 22px;
+  }
+}
+/* SIFA AI heading and founder profile */
+.ai-page .ai-chat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 20px 26px;
+  background: linear-gradient(115deg, #eaf2fc, #e5f7ef);
+  border-bottom: 1px solid #d6e3f1;
+}
+
+.ai-page .ai-chat-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.ai-page .ai-chat-title > img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.ai-page .ai-chat-title h2 {
+  margin: 0;
+  color: #102e52;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.25;
+}
+
+.ai-page .ai-chat-title p {
+  margin: 5px 0 0;
+  color: #52677f;
+  font-size: 13px;
+}
+
+.ai-page .ai-founder-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #d6e3f1;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(16, 46, 82, 0.08);
+  max-width: 100%;
+}
+
+.ai-page .ai-founder-card > img {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  object-position: center 25%;
+  border-radius: 50%;
+  border: 2px solid #65c991;
+  flex-shrink: 0;
+}
+
+.ai-page .ai-founder-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.ai-page .ai-founder-info strong {
+  color: #102e52;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.ai-page .ai-founder-info span {
+  color: #52677f;
+  font-size: 12px;
+}
+
+.ai-page .ai-founder-info a {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #25a85a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.ai-page .ai-founder-info a:hover {
+  background: #188747;
+}
+
+@media (max-width: 700px) {
+  .ai-page .ai-chat-head {
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .ai-page .ai-founder-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
 </style>
 <link rel="icon" type="image/png" href="assets/sifa-logo.png">
 </head>
@@ -122,9 +511,26 @@
 <section class="ai-main" id="ask">
 <div class="container">
 <div class="ai-layout">
-<div class="ai-chat" style="max-width:980px;margin:0 auto;width:100%;">
+<div class="ai-chat" style="max-width:none;margin:0;width:100%;">
 <div class="ai-chat-head">
-<h2>SIFA AI Learning Assistant</h2>
+  <div class="ai-chat-title">
+    <img src="assets/sifa-logo.png" alt="SIFA Global Institute logo">
+    <div>
+      <h2>SIFA AI Learning Assistant</h2>
+      <p>Learn. Practice. Apply.</p>
+    </div>
+  </div>
+
+  <div class="ai-founder-card">
+    <img src="founder-professional.png" alt="SIFA Founder and CEO">
+    <div class="ai-founder-info">
+      <strong>Jean Bosco NKURIKIYUMUKIZA</strong>
+      <span>Founder &amp; CEO</span>
+      <a href="https://wa.me/250782817643" target="_blank" rel="noopener noreferrer">
+        Ask Founder on WhatsApp
+      </a>
+    </div>
+  </div>
 </div>
 <div aria-label="Conversation history" aria-live="polite" class="ai-conversation" id="aiConversation"></div>
 <div aria-labelledby="clearConversationTitle" aria-modal="false" class="ai-clear-dialog" id="clearConversationDialog" role="dialog">
@@ -232,6 +638,7 @@
 </div>
 </div>
 </footer>
+<script src="supabase-config.js"></script>
 <script>
 const SIFA_KNOWLEDGE = [
   {terms:["what is sifa","what does sifa do","sifa global institute","software institute for financial accountants","about sifa"],answer:"SIFA Global Institute stands for Software Institute for Financial Accountants. It is a technology-focused learning institute connecting accounting, finance, technology, practical software skills, and professional development. SIFA's practical philosophy is Learn. Practice. Apply."},
@@ -534,27 +941,111 @@ function saveConversation(){
 }
 
 
-function appendMessageWithLinks(container, text){
-  const pattern = /(https:\/\/[^\s<]+|mailto:[^\s<]+|info\.sifaglobal@yahoo\.com)/gi;
+
+function appendMessageWithLinks(container, text) {
   const value = String(text || "");
-  let last = 0, match;
-  while((match = pattern.exec(value)) !== null){
-    if(match.index > last) container.appendChild(document.createTextNode(value.slice(last, match.index)));
-    let raw = match[0];
-    // Strip punctuation that should remain outside the link.
-    let trailing = "";
-    while(/[.,!?;:)\]]$/.test(raw)){ trailing = raw.slice(-1) + trailing; raw = raw.slice(0,-1); }
-    const a = document.createElement("a");
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    a.href = raw.toLowerCase() === "sifaglobalinstitute12@gmail.com" ? "mailto:sifaglobalinstitute12@gmail.com" : raw;
-    a.textContent = raw;
-    container.appendChild(a);
-    if(trailing) container.appendChild(document.createTextNode(trailing));
-    last = match.index + match[0].length;
+  const lines = value.split(/\r?\n/);
+  let list = null;
+
+  function appendInline(parent, content) {
+    const pattern = /(https?:\/\/[^\s]+|mailto:[^\s]+|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\*\*[^*]+\*\*|\*[^*\n]+\*)/gi;
+    let last = 0;
+    let match;
+
+    while ((match = pattern.exec(content)) !== null) {
+      if (match.index > last) {
+        parent.appendChild(
+          document.createTextNode(content.slice(last, match.index))
+        );
+      }
+
+      const raw = match[0];
+
+      if (/^https?:\/\/|^mailto:/i.test(raw)) {
+        let url = raw;
+        let trailing = "";
+
+        while (/[.,!?;:)\]]$/.test(url)) {
+          trailing = url.slice(-1) + trailing;
+          url = url.slice(0, -1);
+        }
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = url;
+        parent.appendChild(a);
+
+        if (trailing) {
+          parent.appendChild(document.createTextNode(trailing));
+        }
+      } else if (/^[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}$/i.test(raw)) {
+        const a = document.createElement("a");
+        a.href = "mailto:" + raw;
+        a.textContent = raw;
+        parent.appendChild(a);
+      } else if (raw.startsWith("**")) {
+        const strong = document.createElement("strong");
+        strong.textContent = raw.slice(2, -2);
+        parent.appendChild(strong);
+      } else {
+        const em = document.createElement("em");
+        em.textContent = raw.slice(1, -1);
+        parent.appendChild(em);
+      }
+
+      last = match.index + raw.length;
+    }
+
+    if (last < content.length) {
+      parent.appendChild(
+        document.createTextNode(content.slice(last))
+      );
+    }
   }
-  if(last < value.length) container.appendChild(document.createTextNode(value.slice(last)));
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      list = null;
+      continue;
+    }
+
+    const item = trimmed.match(/^[-*]\s+(.+)$/);
+
+    if (item) {
+      if (!list) {
+        list = document.createElement("ul");
+        container.appendChild(list);
+      }
+
+      const li = document.createElement("li");
+      appendInline(li, item[1]);
+      list.appendChild(li);
+      continue;
+    }
+
+    list = null;
+
+    const heading = trimmed.match(/^#{1,3}\s+(.+)$/);
+    const paragraph = document.createElement("p");
+
+    appendInline(paragraph, heading ? heading[1] : trimmed);
+
+    if (heading) {
+      const strong = document.createElement("strong");
+      while (paragraph.firstChild) {
+        strong.appendChild(paragraph.firstChild);
+      }
+      paragraph.appendChild(strong);
+    }
+
+    container.appendChild(paragraph);
+  }
 }
+
 
 function renderConversation(){
   conversationEl.replaceChildren();
@@ -622,7 +1113,7 @@ const askButton = aiForm ? aiForm.querySelector('button[type="submit"]') : null;
 const aiStatus = aiForm ? aiForm.querySelector(".ai-status") : null;
 let aiIsResponding = false;
 
-function submitSifaQuestion(event){
+async function submitSifaQuestion(event){
   if(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -634,14 +1125,53 @@ function submitSifaQuestion(event){
     questionEl.focus();
     return false;
   }
-  aiIsResponding = true;
+  aiIsResponding = true;conversation.push({ role: "user", text: q });
+conversation = conversation.slice(-80);
+saveConversation();
+renderConversation();
   if(askButton) {
     askButton.disabled = true;
     askButton.textContent = "Preparing answer…";
   }
   try {
-    const answer = getContextualAnswer(q);
-    conversation.push({role:"user", text:q}, {role:"assistant", text:String(answer || multilingualFallback(detectSifaLanguage(q)))});
+    const supabaseConfig = window.SIFA_SUPABASE_CONFIG;
+
+if (!supabaseConfig?.url || !supabaseConfig?.anonKey) {
+  throw new Error("Supabase configuration is missing.");
+}
+
+const response = await fetch(
+  `${supabaseConfig.url}/functions/v1/sifa-ai-chat`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": supabaseConfig.anonKey
+    },
+    body: JSON.stringify({
+  question: q,
+  history: conversation
+    .slice(0, -1)
+    .slice(-12)
+    .map((message) => ({
+      role: message.role === "assistant" ? "model" : "user",
+      text: message.text
+    }))
+})
+  }
+);
+
+const data = await response.json();
+
+if (!response.ok) {
+  throw new Error(data.error || "SIFA AI request failed.");
+}
+
+const answer = data.answer;
+    conversation.push({
+  role: "assistant",
+  text: String(answer || multilingualFallback(detectSifaLanguage(q)))
+});
     conversation = conversation.slice(-80);
     saveConversation();
     renderConversation();
