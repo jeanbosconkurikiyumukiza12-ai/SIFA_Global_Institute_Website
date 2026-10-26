@@ -265,7 +265,7 @@ if (error) {
     password,
     options: {
       data: { full_name: name },
-      emailRedirectTo: `${window.location.origin}/student-portal.html`
+      emailRedirectTo: 'https://sifaglobalinstitutewebsite.vercel.app/student-portal.html?confirmed=true'
     }
   });
 
@@ -488,18 +488,34 @@ if (error) {
 
   if (session?.user) {
     const justConfirmed =
-      event === 'SIGNED_IN' &&
-      new URLSearchParams(window.location.search).get('confirmed') === 'true';
+  event === 'SIGNED_IN' &&
+  new URLSearchParams(window.location.search).get('confirmed') === 'true';
 
     await loadUser(session.user);
 
-    if (justConfirmed) {
-      showMessage(
-        'Your email has been confirmed. Welcome to SIFA Global Institute! Your account is ready.',
-        'success'
-      );
-      history.replaceState({}, document.title, window.location.pathname);
+    
+if (justConfirmed) {
+  showMessage(
+    'Your email has been confirmed. Welcome to SIFA Global Institute! Your account is ready.',
+    'success'
+  );
+
+  try {
+    const { data: welcomeData, error: welcomeError } =
+      await supabase.functions.invoke('sifa-welcome-email');
+
+    if (welcomeError) {
+      console.error('SIFA welcome email request failed:', welcomeError);
+    } else {
+      console.log('SIFA welcome email response:', welcomeData);
     }
+  } catch (welcomeError) {
+    console.error('SIFA welcome email request failed:', welcomeError);
+  }
+
+  history.replaceState({}, document.title, window.location.pathname);
+}
+
   } else {
     showLogin();
   }
