@@ -369,7 +369,9 @@ if (error) {
     const{error}=await supabase.auth.updateUser({password:p});
     btn.disabled=false;btn.textContent='Update Password';
     if(error)return showMessage(error.message,'error');
-    closePasswordPanel();showMessage('Your password has been changed successfully.','success');
+    closePasswordPanel();
+$('sifaCloseAccount')?.click();
+showMessage('Your password has been changed successfully.','success');
   });
 
   $('withdrawApplicationBtn')?.addEventListener('click',()=>{
