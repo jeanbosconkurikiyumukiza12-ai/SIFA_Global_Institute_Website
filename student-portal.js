@@ -477,12 +477,17 @@ if (error) {
 });
 
   supabase.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'PASSWORD_RECOVERY' && session?.user) {
+ if (event === 'PASSWORD_RECOVERY' && session?.user) {
     currentUser = session.user;
-    await loadUser(session.user);
-    openPasswordPanel(true);
+
+    setTimeout(async () => {
+        await loadUser(session.user);
+        $('sifaAccountGrid').hidden = false;
+        openPasswordPanel(true);
+    }, 0);
+
     return;
-  }
+}
 
   if (!bootComplete) return;
 
